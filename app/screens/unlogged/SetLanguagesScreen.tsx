@@ -26,10 +26,7 @@ export default function SetLanguagesScreen({ navigation, route }: Props) {
                     total={user.type === 0 ? 4 : 8}
                 />
                 <Title0 title={'Quelle(s) langue(s) parlez-vous ?'} isLeft />
-                <View style={{ gap: 16 }}>
 
-
-                </View>
 
             </View>
             <Button title="Suivant" backgroundColor={Colors.mainBlue} textColor={Colors.white}
