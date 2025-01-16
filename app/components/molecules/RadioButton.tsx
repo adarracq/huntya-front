@@ -10,7 +10,7 @@ type RadioButtonProps = {
   title: string;
   onPress: () => void;
   selected: boolean;
-  icon: string;
+  icon?: string;
   subtitle: string;
 }
 
@@ -25,21 +25,24 @@ export default function RadioButton(props: RadioButtonProps) {
       }
       ]}>
       <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
-        <View style={{
-          width: 40,
-          height: 40,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: props.selected ? Colors.white : Colors.veryLightGrey,
-          borderRadius: 12
-        }}>
-          <Image source={functions.getIconSource(props.icon)}
-            style={{
-              width: 16,
-              height: 16,
-              tintColor: props.selected ? Colors.mainBlue : Colors.darkGrey
-            }} />
-        </View>
+        {props.icon &&
+          <View style={{
+            width: 40,
+            height: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: props.selected ? Colors.white : Colors.veryLightGrey,
+            borderRadius: 12
+          }}>
+            <Image source={functions.getIconSource(props.icon)}
+              style={{
+                width: 16,
+                height: 16,
+                tintColor: props.selected ? Colors.mainBlue : Colors.darkGrey
+              }} />
+
+          </View>
+        }
         <View style={{ alignItems: 'flex-start' }}>
           <Title2 title={props.title} />
           <BodyText text={props.subtitle} color={Colors.darkGrey} />

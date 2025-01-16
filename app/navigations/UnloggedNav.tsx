@@ -8,6 +8,12 @@ import ChooseTypeScreen from '../screens/unlogged/ChooseTypeScreen';
 import SetDetailsScreen from '../screens/unlogged/SetDetailsScreen';
 import User from '../models/User';
 import SetLanguagesScreen from '../screens/unlogged/SetLanguagesScreen';
+import AccountCreatedScreen from '../screens/unlogged/AccountCreatedScreen';
+import SetNetworkScreen from '../screens/unlogged/SetNetworkScreen';
+import PaiementScreen from '../screens/unlogged/PaiementScreen';
+import SelectPlanScreen from '../screens/unlogged/SelectPlanScreen';
+import SetExperienceScreen from '../screens/unlogged/SetExperienceScreen';
+import SetStatusScreen from '../screens/unlogged/SetStatusScreen';
 
 
 export type NavParams = {
@@ -18,6 +24,12 @@ export type NavParams = {
     ChooseType: { user: User };
     SetDetails: { user: User };
     SetLanguages: { user: User };
+    AccountCreated: { type: number };
+    SetNetwork: { user: User };
+    SetStatus: { user: User };
+    SetExperience: { user: User };
+    SelectPlan: { email: string };
+    Paiement: { email: string, plan: number, billing: number };
 };
 
 const Stack = createStackNavigator<NavParams>();
@@ -34,6 +46,12 @@ export default function UnLoggedNav() {
             <Stack.Screen name="ChooseType" component={ChooseTypeScreen} options={{ headerShown: false }} />
             <Stack.Screen name="SetDetails" component={SetDetailsScreen} options={{ headerShown: false }} />
             <Stack.Screen name="SetLanguages" component={SetLanguagesScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="AccountCreated" component={AccountCreatedScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="SetNetwork" component={SetNetworkScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="SetStatus" component={SetStatusScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="SetExperience" component={SetExperienceScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="SelectPlan" component={SelectPlanScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="Paiement" component={PaiementScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

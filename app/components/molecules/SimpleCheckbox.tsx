@@ -1,25 +1,25 @@
 import { TouchableOpacity, Image, StyleSheet, View } from 'react-native'
 import React from 'react'
 import Colors from '../../constants/Colors';
-import Fontisto from '@expo/vector-icons/Fontisto';
 import BodyText from '../atoms/BodyText';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-type RadioButtonProps = {
+type Props = {
   title: string;
   onPress: () => void;
   selected: boolean;
 }
 
-export default function SimpleRadioButton(props: RadioButtonProps) {
+export default function SimpleCheckbox(props: Props) {
   return (
     <TouchableOpacity onPress={props.onPress}
       style={styles.container}>
       <BodyText text={props.title} isMedium />
       {
         props.selected ?
-          <Fontisto name="radio-btn-active" size={20} color={Colors.mainBlue} />
+          <MaterialCommunityIcons name="checkbox-marked" size={20} color={Colors.mainBlueLight} />
           :
-          <Fontisto name="radio-btn-passive" size={20} color={Colors.lightGrey} />
+          <MaterialCommunityIcons name="checkbox-blank-outline" size={20} color={Colors.lightGrey} />
 
       }
 

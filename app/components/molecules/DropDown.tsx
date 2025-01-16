@@ -6,13 +6,16 @@ import BodyText from '../atoms/BodyText';
 import { functions } from '@/app/utils/Functions';
 import ActionSheet, { ActionSheetRef } from "react-native-actions-sheet";
 import SimpleRadioButton from './SimpleRadioButton';
+import SimpleCheckbox from './SimpleCheckbox';
 
 type DropDownProps = {
     placeholder: string;
     value: number;
     title: string;
     items: any[],
+    selectedItemIds?: any[],
     onSelectItem: (item: any) => void;
+    type: 'radio' | 'checkbox';
     style?: ViewStyle;
 }
 
@@ -67,15 +70,25 @@ export default function DropDown(props: DropDownProps) {
                 <View style={{ paddingBottom: 50, paddingTop: 35, gap: 20 }}>
                     <SmallText text='Genre' isLeft style={{ paddingLeft: 16 }} />
                     {props.items.map((item, index) => (
-                        <SimpleRadioButton
-                            key={index}
-                            title={item.label}
-                            selected={props.value === item.id}
-                            onPress={() => {
-                                props.onSelectItem(item);
-                                actionSheetRef.current?.hide();
-                            }}
-                        />
+                        props.type === 'radio' ?
+                            <SimpleRadioButton
+                                key={index}
+                                title={item.label}
+                                selected={item.id === props.value}
+                                onPress={() => {
+                                    props.onSelectItem(item);
+                                    actionSheetRef.current?.hide();
+                                }}
+                            />
+                            :
+                            <SimpleCheckbox
+                                key={index}
+                                title={item.label}
+                                selected={!!props.selectedItemIds && props.selectedItemIds.includes(item.id)}
+                                onPress={() => {
+                                    props.onSelectItem(item);
+                                }}
+                            />
                     ))}
                 </View>
             </ActionSheet>

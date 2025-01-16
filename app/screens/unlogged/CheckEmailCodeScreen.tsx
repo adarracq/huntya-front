@@ -70,7 +70,7 @@ export default function CheckEmailCodeScreen({ navigation, route }: Props) {
                 if (res.message) {
                     showMessage({
                         message: 'Code envoyé',
-                        description: res.message,
+                        description: 'Verifiez votre boite e-mail',
                         type: 'success',
                     });
                 }

@@ -1,4 +1,4 @@
-import IAgent from "./IAgent";
+import Agent from "./Agent";
 
 export default class User {
     _id: string | null;
@@ -14,7 +14,7 @@ export default class User {
     status: string | null; // verify, unverify, pending or banned
     verified: boolean | null;
     friends: object[] | null;
-    agentProperties: IAgent | null;
+    agentProperties: Agent | null;
 
     constructor(email: string) {
         this.email = email;
@@ -28,7 +28,7 @@ export default class User {
         this.imageUrl = null;
         this.presentation = null;
         this.status = null;
-        this.verified = null;
+        this.verified = true;
         this.friends = [];
         this.agentProperties = null;
     }

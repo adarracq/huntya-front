@@ -37,7 +37,7 @@ export default function ChooseTypeScreen({ navigation, route }: Props) {
             <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 30, left: 20 }}>
                 <Image source={functions.getIconSource('arrow-left')} style={{ width: 20, height: 20 }} />
             </TouchableOpacity>
-            <View style={{ gap: 30 }}>
+            <View style={{ gap: 24 }}>
                 <ProgressBar progress={2} total={4} title="Objectif" width={80} />
                 <Title0 title={'Quel est votre objectif ?'} isLeft />
                 <View style={{ gap: 16 }}>

@@ -45,9 +45,9 @@ export default function SetDetailsScreen({ navigation, route }: Props) {
             <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 30, left: 20 }}>
                 <Image source={functions.getIconSource('arrow-left')} style={{ width: 20, height: 20 }} />
             </TouchableOpacity>
-            <View style={{ gap: 30 }}>
+            <View style={{ gap: 24 }}>
                 <ProgressBar progress={3} title="Profil" width={80}
-                    total={user.type === 0 ? 4 : 8}
+                    total={user.type === 0 ? 4 : 9}
                 />
                 <Title0 title={'Renseignez votre profil'} isLeft />
                 <View style={{ gap: 16 }}>
@@ -72,6 +72,7 @@ export default function SetDetailsScreen({ navigation, route }: Props) {
                         title="Genre"
                         placeholder="Selectionnez un genre"
                         value={gender}
+                        type='radio'
                         items={[
                             { id: 0, label: 'Homme' },
                             { id: 1, label: 'Femme' },

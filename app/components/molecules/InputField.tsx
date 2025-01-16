@@ -1,10 +1,11 @@
-import { View, TextInput, TextStyle, ViewStyle } from 'react-native'
+import { View, TextInput, TextStyle, ViewStyle, Image, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import Colors from '../../constants/Colors';
 import SmallText from '../atoms/SmallText';
 import Title2 from '../atoms/Title2';
 import Entypo from '@expo/vector-icons/Entypo';
 import BodyText from '../atoms/BodyText';
+import { functions } from '@/app/utils/Functions';
 
 type InputFieldProps = {
     placeholder: string;
@@ -18,6 +19,7 @@ type InputFieldProps = {
     isMultiline?: boolean;
     height?: number;
     style?: ViewStyle;
+    isCreditCard?: boolean;
 }
 
 export default function InputField(props: InputFieldProps) {
@@ -71,8 +73,24 @@ export default function InputField(props: InputFieldProps) {
                     keyboardType={props.keyBoardType || 'default'}
                     multiline={props.isMultiline}
                 />
+                {
+                    props.isCreditCard &&
+                    <Image
+                        source={functions.getIconSource('payments')}
+                        style={styles.payments}
+                    />
+                }
             </View>
             {props.errorText && <SmallText text={props.errorText} color={Colors.mainRed} />}
         </View>
     )
 }
+const styles = StyleSheet.create({
+    payments: {
+        height: 20,
+        width: 113,
+        position: 'absolute',
+        right: 16,
+        top: 20,
+    }
+})

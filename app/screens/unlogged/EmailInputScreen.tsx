@@ -65,6 +65,7 @@ export default function EmailInputScreen({ navigation, route }: Props) {
         userService.loginOrSignup({ email: email })
             .then((res) => {
                 setLoading(false);
+                console.log(res);
                 if (res.message) {
                     navigation.navigate('CheckEmailCode', { email: email, loginOrSignup: res.message });
                 }
@@ -77,6 +78,7 @@ export default function EmailInputScreen({ navigation, route }: Props) {
                 }
             })
             .catch((err) => {
+                setLoading(false);
                 console.log(err);
                 showMessage({
                     message: 'Erreur',
@@ -91,7 +93,7 @@ export default function EmailInputScreen({ navigation, route }: Props) {
             <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 30, left: 20 }}>
                 <Image source={functions.getIconSource('arrow-left')} style={{ width: 20, height: 20 }} />
             </TouchableOpacity>
-            <View style={{ gap: 30 }}>
+            <View style={{ gap: 24 }}>
                 <ProgressBar progress={1} total={4} title="E-mail" width={80} />
                 <Title0 title={'Quelle est votre adresse e-mail ?'} isLeft />
                 <InputField placeholder="pierre.dupont@gmail.com"
