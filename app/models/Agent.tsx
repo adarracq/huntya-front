@@ -10,18 +10,17 @@ export default class Agent {
     badges: number[];
     // subscription
     subscription: Subscription | null;
-
-    distanceFromUser: number | null;
+    maxZones: number;
 
     constructor() {
         this.workStatus = null;
         this.network = null;
         this.specialities = null;
         this.experience = null;
-        this.zonesId = null;
+        this.zonesId = [];
         this.verifId = null;
         this.badges = [];
         this.subscription = null;
-        this.distanceFromUser = null;
+        this.maxZones = 0;
     }
 }

@@ -20,8 +20,12 @@ function getIconSource(name: string) {
             return require('../assets/icons/mail.png');
         case 'arrow-left':
             return require('../assets/icons/arrow-left.png');
+        case 'arrow-left0':
+            return require('../assets/icons/arrow-left0.png');
         case 'arrow-down':
             return require('../assets/icons/arrow-down.png');
+        case 'arrow-top':
+            return require('../assets/icons/arrow-top.png');
         case 'flag-french':
             return require('../assets/icons/flag-french.png');
         case 'flag-uk':
@@ -58,6 +62,12 @@ function getIconSource(name: string) {
             return require('../assets/icons/paypal.png');
         case 'payments':
             return require('../assets/icons/payments.png');
+        case 'trash':
+            return require('../assets/icons/trash.png');
+        case 'map':
+            return require('../assets/icons/map.png');
+        case 'simple-marker':
+            return require('../assets/icons/simple-marker.png');
         default:
             return require('../assets/icons/none.png');
     }

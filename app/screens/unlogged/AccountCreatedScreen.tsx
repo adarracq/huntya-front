@@ -13,7 +13,11 @@ type Props = NativeStackScreenProps<NavParams, 'AccountCreated'>;
 export default function AccountCreatedScreen({ navigation, route }: Props) {
 
     const next = () => {
-        //TODO login
+        if (route.params.type === 0) {
+            // TODO : login user
+        } else {
+            navigation.navigate('SelectZoneOnBoarding', { email: route.params.email })
+        }
     }
     return (
         <LinearGradient
@@ -21,7 +25,12 @@ export default function AccountCreatedScreen({ navigation, route }: Props) {
             style={styles.container}>
             <View></View>
             <View style={{ gap: 20 }}>
-                <Image source={require('@/app/assets/images/completed.png')}
+                <Image source={
+                    route.params.type === 0 ?
+                        require('@/app/assets/images/completed.png')
+                        :
+                        require('@/app/assets/images/completed2.png')
+                }
                     style={{
                         width: Dimensions.get('window').width - 100,
                         height: 300,

@@ -7,6 +7,7 @@ import { UserContext } from './contexts/UserContext';
 import FlashMessage from 'react-native-flash-message';
 import UnLoggedNav from './navigations/UnloggedNav';
 import User from './models/User';
+import 'react-native-get-random-values';
 
 SplashScreen.preventAutoHideAsync();
 SplashScreen.setOptions({

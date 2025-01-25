@@ -17,7 +17,7 @@ export default {
                     icon: 'marker-home',
                 },
                 {
-                    title: 'Jusqu’à 3 leads par mois',
+                    title: 'Leads illimités',
                     info: 'Recevez des prospects qualifiés chaque mois.',
                     icon: 'profile',
                 },
@@ -38,7 +38,7 @@ export default {
         {
             label: 'Premium',
             value: 1,
-            priceLabel: '24,90 €',
+            priceLabel: '29,90 €',
             benefits: [
                 {
                     title: 'Fonctionnalités avancées',
@@ -46,7 +46,7 @@ export default {
                     icon: 'settings',
                 },
                 {
-                    title: '3 zone de chalandise',
+                    title: '3 zones de chalandise',
                     info: 'Ciblez une zone géographique précise pour vos opportunités.',
                     icon: 'marker-home',
                 },
@@ -58,13 +58,13 @@ export default {
             ],
             monthly: {
                 title: 'Mensuel',
-                total: '24,90€',
-                priceLabel: '24,90 € / mois',
+                total: '29,90€',
+                priceLabel: '29,90 € / mois',
             },
             yearly: {
                 title: 'A l\'année',
-                total: '239,90€',
-                priceLabel: '19,99€ / mois (soit 239,90€ par an)',
+                total: '299,90€',
+                priceLabel: '24,90€ / mois (soit 299,90€ par an)',
             },
         },
     ],

@@ -135,6 +135,18 @@ export default function OnBoardingScreen({ navigation, route }: Props) {
                 data={slides}
                 renderNextButton={renderNextButton}
                 renderDoneButton={renderDoneButton}
+                activeDotStyle={{
+                    backgroundColor: Colors.white,
+                    width: 30
+                }}
+            />
+            <Button title='ByPass'
+                onPress={() => {
+                    navigation.navigate('SelectZoneMap', { email: 'antoine.cheval.darracq@gmail.com' });
+                }}
+                backgroundColor={Colors.white}
+                textColor={Colors.black}
+                style={{ width: Dimensions.get('window').width - 40 }}
             />
         </LinearGradient>
     );

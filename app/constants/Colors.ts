@@ -7,7 +7,8 @@ export default {
     lightBlue: '#E7EBFD',
 
     //mainBlue: '#03224C',
-    mainRed: '#E55E48',
+    mainRed: '#F03F5F',
+    mainRed2: '#E55E48',
     darkGrey: '#717279',
     lightGrey: '#C6C7CA',
     veryLightGrey: '#EDEDEE',

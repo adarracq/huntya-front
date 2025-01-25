@@ -34,7 +34,7 @@ export default function SetLanguagesScreen({ navigation, route }: Props) {
             userService.update({ user })
                 .then((response) => {
                     setLoading(false);
-                    navigation.navigate('AccountCreated', { type: user.type || 0 });
+                    navigation.navigate('AccountCreated', { type: user.type || 0, email: user.email });
                 })
                 .catch((error) => {
                     console.log(error);

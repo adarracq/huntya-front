@@ -59,6 +59,7 @@ export default function PaiementScreen({ navigation, route }: Props) {
                 email: route.params.email,
                 agentProperties:
                 {
+                    maxZones: route.params.plan == 0 ? 1 : 3,
                     subscription:
                     {
                         plan: route.params.plan,
@@ -76,7 +77,7 @@ export default function PaiementScreen({ navigation, route }: Props) {
         userService.update(params)
             .then(() => {
                 setLoading(false);
-                navigation.navigate('AccountCreated', { type: 1 });
+                navigation.navigate('AccountCreated', { type: 1, email: route.params.email });
             })
             .catch((error) => {
                 setLoading(false);
