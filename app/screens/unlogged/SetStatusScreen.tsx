@@ -31,7 +31,7 @@ export default function SetStatusScreen({ navigation, route }: Props) {
             showMessage({
                 message: 'Erreur',
                 description: 'Veuillez selectionner un statut',
-                type: 'danger',
+                type: 'warning',
             })
             return;
         }

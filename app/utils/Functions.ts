@@ -2,6 +2,8 @@ import { Alert } from "react-native";
 
 export const functions = {
     getIconSource,
+    coordsIsInZone,
+    setContour
 }
 
 function getIconSource(name: string) {
@@ -68,7 +70,46 @@ function getIconSource(name: string) {
             return require('../assets/icons/map.png');
         case 'simple-marker':
             return require('../assets/icons/simple-marker.png');
+        case 'geolocation':
+            return require('../assets/icons/geolocation.png');
+        case 'pin0':
+            return require('../assets/icons/pin0.png');
+        case 'pin1':
+            return require('../assets/icons/pin1.png');
+        case 'pin2':
+            return require('../assets/icons/pin2.png');
         default:
             return require('../assets/icons/none.png');
     }
+}
+
+// check if the coordinates are in the zone contour
+function coordsIsInZone(coords: { latitude: number, longitude: number }, contour: number[][]) {
+    let x = coords.longitude;
+    let y = coords.latitude;
+
+    let inside = false;
+    for (let i = 0, j = contour.length - 1; i < contour.length; j = i++) {
+        let xi = contour[i][0];
+        let yi = contour[i][1];
+        let xj = contour[j][0];
+        let yj = contour[j][1];
+
+        let intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+    }
+
+    return inside;
+}
+
+// set the contour of the zone from geoloc API fit for the map coordinates
+function setContour(contour: number[][]) {
+    if (!contour) return [];
+    let res = contour.map((c) => {
+        return {
+            latitude: c[1],
+            longitude: c[0]
+        }
+    });
+    return res;
 }

@@ -1,5 +1,5 @@
 import { View, StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavParams } from '@/app/navigations/UnloggedNav';
 import { NativeStackScreenProps } from 'react-native-screens/lib/typescript/native-stack/types';
 import Colors from '@/app/constants/Colors';
@@ -13,6 +13,7 @@ import InputField from '@/app/components/molecules/InputField';
 import LoadingScreen from '@/app/components/molecules/LoadingScreen';
 import { userService } from '@/app/services/user.service';
 import { showMessage } from 'react-native-flash-message';
+import User from '@/app/models/User';
 
 type Props = NativeStackScreenProps<NavParams, 'Paiement'>;
 export default function PaiementScreen({ navigation, route }: Props) {
@@ -32,6 +33,26 @@ export default function PaiementScreen({ navigation, route }: Props) {
         cardCvv: '',
         cardName: '',
     });
+
+    const [user, setUser] = useState<User | null>(null);
+
+    const getUser = async () => {
+        setLoading(true);
+        userService.getByEmail(route.params.email)
+            .then((response) => {
+                setUser(response);
+                setLoading(false);
+            })
+            .catch((error) => {
+                showMessage({
+                    message: "Erreur",
+                    description: "Une erreur s'est produite",
+                    type: "danger",
+                });
+                console.log(error);
+            });
+    }
+
 
     function getExpirationDate() {
         if (route.params.billing == 1) {
@@ -53,12 +74,12 @@ export default function PaiementScreen({ navigation, route }: Props) {
             new Date(new Date().setMonth(new Date().getMonth() + 1)),
         ];
         let params = {
-            email: route.params.email,
             user:
             {
                 email: route.params.email,
                 agentProperties:
                 {
+                    ...user!.agentProperties,
                     maxZones: route.params.plan == 0 ? 1 : 3,
                     subscription:
                     {
@@ -90,6 +111,10 @@ export default function PaiementScreen({ navigation, route }: Props) {
             })
 
     }
+
+    useEffect(() => {
+        getUser();
+    }, []);
 
     return (
         <View style={styles.container}>

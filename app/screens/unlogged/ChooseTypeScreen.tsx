@@ -22,7 +22,7 @@ export default function ChooseTypeScreen({ navigation, route }: Props) {
             showMessage({
                 message: 'Erreur',
                 description: 'Veuillez choisir un objectif',
-                type: 'danger',
+                type: 'warning',
             })
             return;
         }

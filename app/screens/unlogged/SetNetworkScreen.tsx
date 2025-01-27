@@ -35,7 +35,7 @@ export default function SetNetworkScreen({ navigation, route }: Props) {
             showMessage({
                 message: 'Erreur',
                 description: 'Veuillez entrer un réseau',
-                type: 'danger',
+                type: 'warning',
             })
             return;
         }

@@ -9,7 +9,7 @@ export default function FacebookSignIn() {
         showMessage({
             message: 'Erreur',
             description: 'Fonctionnalité non disponible pour le moment',
-            type: 'danger',
+            type: 'warning',
         });
     }
 

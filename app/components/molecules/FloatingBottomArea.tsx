@@ -30,8 +30,8 @@ export default function FloatingBottomArea(props: Props) {
                     onPress={() => setIsExpanded(!isExpanded)}>
                     <Image source={
                         isExpanded ?
-                            functions.getIconSource('arrow-top')
-                            : functions.getIconSource('arrow-down')
+                            functions.getIconSource('arrow-down')
+                            : functions.getIconSource('arrow-top')
                     }
                         style={{
                             width: 20,

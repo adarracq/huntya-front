@@ -140,13 +140,12 @@ export default function OnBoardingScreen({ navigation, route }: Props) {
                     width: 30
                 }}
             />
-            <Button title='ByPass'
+            <Button title='bypass for dev'
                 onPress={() => {
                     navigation.navigate('SelectZoneMap', { email: 'antoine.cheval.darracq@gmail.com' });
                 }}
                 backgroundColor={Colors.white}
                 textColor={Colors.black}
-                style={{ width: Dimensions.get('window').width - 40 }}
             />
         </LinearGradient>
     );

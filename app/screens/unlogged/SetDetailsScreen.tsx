@@ -28,7 +28,7 @@ export default function SetDetailsScreen({ navigation, route }: Props) {
             showMessage({
                 message: 'Erreur',
                 description: 'Veuillez renseigner tous les champs',
-                type: 'danger',
+                type: 'warning',
             })
             return;
         }

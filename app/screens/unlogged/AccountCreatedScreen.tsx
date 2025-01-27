@@ -15,8 +15,11 @@ export default function AccountCreatedScreen({ navigation, route }: Props) {
     const next = () => {
         if (route.params.type === 0) {
             // TODO : login user
-        } else {
+        } else if (route.params.type === 1) {
             navigation.navigate('SelectZoneOnBoarding', { email: route.params.email })
+        }
+        else if (route.params.type === 2) {
+            //TODO : login agent
         }
     }
     return (
@@ -29,7 +32,10 @@ export default function AccountCreatedScreen({ navigation, route }: Props) {
                     route.params.type === 0 ?
                         require('@/app/assets/images/completed.png')
                         :
-                        require('@/app/assets/images/completed2.png')
+                        route.params.type === 1 ?
+                            require('@/app/assets/images/completed2.png')
+                            :
+                            require('@/app/assets/images/completed3.png')
                 }
                     style={{
                         width: Dimensions.get('window').width - 100,
@@ -38,20 +44,32 @@ export default function AccountCreatedScreen({ navigation, route }: Props) {
                         marginBottom: 30,
                     }}
                 />
-                <Title0 title={'Félicitations !\nVotre compte est créé'} color={Colors.white} />
+                <Title0 title={route.params.type == 2 ?
+                    'Votre compte est prêt à être utilisé'
+                    :
+                    'Félicitations !\nVotre compte est créé'
+                }
+                    color={Colors.white} />
                 <BodyText
                     text={
                         route.params.type === 0 ?
                             'Vous pouvez dès maintenant créer votre annonce et trouver votre agent immobilier.'
                             :
-                            'Vous pouvez désormais sélectionner vos zones de chalandises'
+                            route.params.type === 1 ?
+                                'Vous pouvez désormais sélectionner vos zones de chalandises'
+                                :
+                                'Vous pouvez désormais utiliser l’application pour trouver vos premiers clients.'
                     }
                     color={Colors.white}
                     centered
                 />
 
             </View>
-            <Button title="Continuer" backgroundColor={Colors.white}
+            <Button title={route.params.type == 2 ?
+                'Commencer'
+                :
+                'Continuer'
+            } backgroundColor={Colors.white}
                 onPress={next} />
 
         </LinearGradient>

@@ -31,12 +31,18 @@ export default function SelectZoneMapScreen({ navigation, route }: Props) {
     }
 
 
-    const onValidate = (selectedZonesIds: number[]) => {
+    const onValidate = (selectedZonesIds: string[]) => {
         // update user with selected zones
-        const updatedUser = { ...user, agentProperties: { ...user!.agentProperties, zonesId: selectedZonesIds } };
+        const updatedUser = {
+            user: {
+                email: user!.email,
+                agentProperties: { ...user!.agentProperties, zonesId: selectedZonesIds }
+            }
+        };
+
         userService.update(updatedUser)
             .then(() => {
-                //navigation.navigate('Home');
+                navigation.navigate('AccountCreated', { type: 2, email: user!.email });
             })
             .catch((error) => {
                 showMessage({

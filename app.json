@@ -17,7 +17,12 @@
         "foregroundImage": "./app/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.huntya.mobile"
+      "package": "com.huntya.mobile",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCE5yztwLaNNlnFdCjJ-k8gCHIS2gzL5O8"
+        }
+      }
     },
     "web": {
       "bundler": "metro",

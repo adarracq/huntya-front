@@ -8,19 +8,28 @@ import { functions } from '@/app/utils/Functions';
 import Colors from '@/app/constants/Colors';
 
 type Props = {
-    onSelectAddress: (coords: Coordinates) => void;
-    isSearching: (isSearching: boolean) => void;
+    onSelectAddress: (coords: Coordinates, address: any) => void;
+    //isSearching: (isSearching: boolean) => void;
 }
 export default function SearchAddress(props: Props) {
 
     const [isFocused, setIsFocused] = useState(false);
 
-    async function onSearch(data: any) {
-        const coords = await Location.geocodeAsync(data.description);
-        props.onSelectAddress(coords[0]);
-        // tell parent that we are not searching anymore
-        props.isSearching(false);
-        setIsFocused(false);
+
+
+    const onSearch = async (data: any) => {
+        // ask for permission to access location
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+            console.log('Please grant permission to access your location.');
+        }
+        else {
+            const coords = await Location.geocodeAsync(data.description);
+
+            props.onSelectAddress(coords[0], data);
+
+            setIsFocused(false);
+        }
     }
 
 
@@ -30,7 +39,6 @@ export default function SearchAddress(props: Props) {
                 <Pressable
                     onPress={() => {
                         setIsFocused(true);
-                        props.isSearching(true);
                     }}
                     style={styles.searchBar}
                 >
@@ -47,7 +55,6 @@ export default function SearchAddress(props: Props) {
                 <TouchableOpacity
                     onPress={() => {
                         setIsFocused(false);
-                        props.isSearching(false);
                     }}
                     style={styles.backArrow}
                 >
@@ -146,5 +153,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         backgroundColor: Colors.white,
+        zIndex: 2,
     }
 })
