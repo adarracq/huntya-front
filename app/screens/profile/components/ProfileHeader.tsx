@@ -7,9 +7,11 @@ import Colors from '@/app/constants/Colors';
 import BodyText from '@/app/components/atoms/BodyText';
 import * as ImagePicker from 'expo-image-picker';
 import { userService } from '@/app/services/user.service';
+import Title0 from '@/app/components/atoms/Title0';
 
 type Props = {
     user: User;
+    onSeePublicProfile: () => void;
 }
 export default function ProfileHeader(props: Props) {
 
@@ -57,7 +59,7 @@ export default function ProfileHeader(props: Props) {
     }
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', marginBottom: 20 }}>
+        <View style={styles.container}>
             <Image
                 style={styles.picture}
                 source={{ uri: props.user.imageUrl ?? '' }}
@@ -67,25 +69,31 @@ export default function ProfileHeader(props: Props) {
 
                 <Image
                     source={functions.getIconSource('camera')}
-                    style={{
-                        width: 16,
-                        height: 16,
-                        tintColor: Colors.mainBlue,
-                        alignSelf: 'center'
-                    }} />
-                <BodyText
-                    text={props.user.imageUrl ? 'Modifier' : 'Ajouter'}
-                    color={Colors.mainBlue}
-                />
+                    style={styles.camera} />
             </TouchableOpacity>
-            <Title1
+            <Title0
                 title={getFirstNameAndAge()}
             />
+            <TouchableOpacity
+                style={styles.btnPublicProfile}
+                onPress={props.onSeePublicProfile}>
+                <BodyText
+                    text='Voir le profil public'
+                    color={Colors.white}
+                    isBold
+                />
+
+            </TouchableOpacity>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+        marginBottom: 20,
+        gap: 20
+    },
     picture: {
         width: 120,
         height: 120,
@@ -94,15 +102,23 @@ const styles = StyleSheet.create({
         backgroundColor: 'grey'
     },
     editBtn: {
-        borderRadius: 16,
-        backgroundColor: Colors.lightGrey,
-        display: 'flex',
-        flexDirection: 'row',
+        borderRadius: 8,
+        backgroundColor: Colors.mainBlue,
         alignItems: 'center',
-        gap: 8,
-        padding: 8,
-        paddingLeft: 16,
-        paddingRight: 16,
-        marginTop: -36,
+        padding: 12,
+        marginTop: -90,
+        marginLeft: 80,
     },
+    camera: {
+        width: 20,
+        height: 20,
+        tintColor: Colors.white,
+        alignSelf: 'center'
+    },
+    btnPublicProfile: {
+        backgroundColor: Colors.mainBlue,
+        padding: 12,
+        borderRadius: 8
+    }
+
 })

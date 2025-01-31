@@ -28,6 +28,8 @@ function getIconSource(name: string) {
             return require('../assets/icons/arrow-left.png');
         case 'arrow-left0':
             return require('../assets/icons/arrow-left0.png');
+        case 'arrow-right0':
+                return require('../assets/icons/arrow-right0.png');
         case 'arrow-down':
             return require('../assets/icons/arrow-down.png');
         case 'arrow-top':

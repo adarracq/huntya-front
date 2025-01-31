@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Colors from '../constants/Colors';
 import { StyleSheet } from 'react-native';
@@ -6,6 +6,7 @@ import { UserContext } from '../contexts/UserContext';
 import TabBarElement from '../components/molecules/TabBarElement';
 import CalendarNav from './CalendarNav';
 import ProfileNav from './ProfileNav';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 export type BottomNavParams = {
     Project: undefined;
@@ -18,16 +19,27 @@ export type BottomNavParams = {
 const Tab = createBottomTabNavigator<BottomNavParams>();
 
 
+
 export default function BottomTabNav() {
     const [user, setUser] = useContext(UserContext);
 
+    const noTabBarScreens = ['EditPersonalData'];
     return (
         <Tab.Navigator
             initialRouteName="Map"
-            screenOptions={{
-                tabBarStyle: { ...styles.tabBarStyle },
-                headerShown: false,
-                tabBarShowLabel: false,
+            screenOptions={(props) => {
+                console.log(getFocusedRouteNameFromRoute(props.route));
+                return {
+                    headerShown: false,
+                    tabBarShowLabel: false,
+                    tabBarStyle: {
+                        ...styles.tabBarStyle,
+                        display:
+                            noTabBarScreens.includes(getFocusedRouteNameFromRoute(props.route) ?? '')
+                                ? "none"
+                                : "flex",
+                    },
+                };
             }}
         >
             <Tab.Screen

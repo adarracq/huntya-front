@@ -13,6 +13,7 @@ import SmallText from '@/app/components/atoms/SmallText';
 import User from '@/app/models/User';
 import LoadingScreen from '@/app/components/molecules/LoadingScreen';
 import { UserContext } from '@/app/contexts/UserContext';
+import AsyncStorageUser from '@/app/utils/AsyncStorageUser';
 
 type Props = NativeStackScreenProps<NavParams, 'CheckEmailCode'>;
 export default function CheckEmailCodeScreen({ navigation, route }: Props) {
@@ -47,10 +48,12 @@ export default function CheckEmailCodeScreen({ navigation, route }: Props) {
                     if (response.message) {
                         console.log(loginOrSignup);
                         if (loginOrSignup === 'login') {
-                            setUser({
+                            let user = {
                                 email: email,
                                 type: response.type == 0 ? 'user' : 'agent'
-                            });
+                            }
+                            setUser(user);
+                            AsyncStorageUser.setUser(user);
                         }
                         else if (loginOrSignup === 'signup') {
                             let user = new User(email);

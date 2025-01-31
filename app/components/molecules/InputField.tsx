@@ -46,6 +46,7 @@ export default function InputField(props: InputFieldProps) {
             <View
                 style={[{
                     width: '100%',
+                    height: props.height || 64,
                     borderColor: props.errorText ? Colors.mainRed : isFocused ? Colors.mainBlue : Colors.lightGrey,
                     borderWidth: isFocused || props.errorText ? 2 : 1,
                     borderRadius: 16,
