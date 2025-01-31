@@ -3,7 +3,11 @@ import { Alert } from "react-native";
 export const functions = {
     getIconSource,
     coordsIsInZone,
-    setContour
+    setContour,
+    separateThousands,
+    dateToString,
+    dateToStringWithDayOfWeek,
+    getAgeFromBirthdate,
 }
 
 function getIconSource(name: string) {
@@ -78,6 +82,20 @@ function getIconSource(name: string) {
             return require('../assets/icons/pin1.png');
         case 'pin2':
             return require('../assets/icons/pin2.png');
+        case 'home':
+            return require('../assets/icons/home.png');
+        case 'message':
+            return require('../assets/icons/message.png');
+        case 'messages':
+            return require('../assets/icons/messages.png');
+        case 'calendar':
+            return require('../assets/icons/calendar.png');
+        case 'list':
+            return require('../assets/icons/list.png');
+        case 'plus':
+            return require('../assets/icons/plus.png');
+        case 'camera':
+            return require('../assets/icons/camera.png');
         default:
             return require('../assets/icons/none.png');
     }
@@ -113,3 +131,38 @@ function setContour(contour: number[][]) {
     });
     return res;
 }
+
+function separateThousands(number: number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+function dateToString(date: Date) {
+    const _date = new Date(date);
+    const day = _date.getDate().toString().padStart(2, '0');
+    const month = (_date.getMonth() + 1).toString().padStart(2, '0');
+    return `${day}/${month}/${_date.getFullYear()}`;
+}
+
+function dateToStringWithDayOfWeek(date: Date) {
+    const _date = new Date(date);
+    const day = _date.getDate().toString().padStart(2, '0');
+    const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    const daysOfWeek = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    return `${daysOfWeek[_date.getDay()]} ${day} ${monthNames[_date.getMonth()]}`;
+}
+
+function getAgeFromBirthdate(date: Date) {
+    const birthdate = date.toString().split('T')[0];
+    const yearBirth = parseInt(birthdate.split('/')[0]);
+    const monthBirth = parseInt(birthdate.split('/')[1]) - 1;
+    const dayBirth = parseInt(birthdate.split('/')[2]);
+    const now = new Date();
+    const age = now.getFullYear() - yearBirth;
+
+    if (now.getMonth() < monthBirth || (now.getMonth() === monthBirth && now.getDate() < dayBirth)) {
+        return age - 1;
+    }
+
+    return age;
+}
+

@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import Colors from '@/app/constants/Colors';
 import Title0 from '@/app/components/atoms/Title0';
@@ -7,19 +7,34 @@ import Button from '@/app/components/atoms/Button';
 import { NativeStackScreenProps } from 'react-native-screens/lib/typescript/native-stack/types';
 import { NavParams } from '@/app/navigations/UnloggedNav';
 import BodyText from '@/app/components/atoms/BodyText';
+import { UserContext } from '@/app/contexts/UserContext';
+import AsyncStorageUser from '@/app/utils/AsyncStorageUser';
 
 
 type Props = NativeStackScreenProps<NavParams, 'AccountCreated'>;
 export default function AccountCreatedScreen({ navigation, route }: Props) {
 
+    const [user, setUser] = useContext(UserContext);
+
     const next = () => {
         if (route.params.type === 0) {
-            // TODO : login user
+            let _user = {
+                email: route.params.email,
+                type: 'user'
+            };
+            setUser(_user);
+            AsyncStorageUser.setUser(_user);
+
         } else if (route.params.type === 1) {
             navigation.navigate('SelectZoneOnBoarding', { email: route.params.email })
         }
         else if (route.params.type === 2) {
-            //TODO : login agent
+            let _user = {
+                email: route.params.email,
+                type: 'agent'
+            };
+            setUser(_user);
+            AsyncStorageUser.setUser(_user);
         }
     }
     return (

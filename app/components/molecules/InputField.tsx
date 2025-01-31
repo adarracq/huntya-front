@@ -61,7 +61,7 @@ export default function InputField(props: InputFieldProps) {
                 />
                 <TextInput
                     style={{
-                        fontFamily: 'title-regular',
+                        fontFamily: props.value ? 'title-bold' : 'title',
                         fontSize: 16,
                         textAlignVertical: props.isMultiline ? 'top' : 'center',
                     }}

@@ -16,6 +16,7 @@ type DropDownProps = {
     selectedItemIds?: any[],
     onSelectItem: (item: any) => void;
     type: 'radio' | 'checkbox';
+    children?: any;
     style?: ViewStyle;
 }
 
@@ -51,6 +52,7 @@ export default function DropDown(props: DropDownProps) {
                         />
                         <BodyText
                             text={props.items.find(item => item.id === props.value)?.label || props.placeholder}
+                            isBold={props.value !== -1}
                         />
                     </View>
                     <Image source={functions.getIconSource('arrow-down')}
@@ -68,28 +70,32 @@ export default function DropDown(props: DropDownProps) {
                     backgroundColor: Colors.white,
                 }}>
                 <View style={{ paddingBottom: 50, paddingTop: 35, gap: 20 }}>
-                    <SmallText text='Genre' isLeft style={{ paddingLeft: 16 }} />
-                    {props.items.map((item, index) => (
-                        props.type === 'radio' ?
-                            <SimpleRadioButton
-                                key={index}
-                                title={item.label}
-                                selected={item.id === props.value}
-                                onPress={() => {
-                                    props.onSelectItem(item);
-                                    actionSheetRef.current?.hide();
-                                }}
-                            />
+                    <SmallText text={props.title} isLeft style={{ paddingLeft: 16 }} />
+                    {
+                        props.children ?
+                            props.children
                             :
-                            <SimpleCheckbox
-                                key={index}
-                                title={item.label}
-                                selected={!!props.selectedItemIds && props.selectedItemIds.includes(item.id)}
-                                onPress={() => {
-                                    props.onSelectItem(item);
-                                }}
-                            />
-                    ))}
+                            props.items.map((item, index) => (
+                                props.type === 'radio' ?
+                                    <SimpleRadioButton
+                                        key={index}
+                                        title={item.label}
+                                        selected={item.id === props.value}
+                                        onPress={() => {
+                                            props.onSelectItem(item);
+                                            actionSheetRef.current?.hide();
+                                        }}
+                                    />
+                                    :
+                                    <SimpleCheckbox
+                                        key={index}
+                                        title={item.label}
+                                        selected={!!props.selectedItemIds && props.selectedItemIds.includes(item.id)}
+                                        onPress={() => {
+                                            props.onSelectItem(item);
+                                        }}
+                                    />
+                            ))}
                 </View>
             </ActionSheet>
         </>

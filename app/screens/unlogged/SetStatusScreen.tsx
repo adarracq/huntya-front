@@ -67,22 +67,30 @@ export default function SetStatusScreen({ navigation, route }: Props) {
                         }}
                     />
                 </View>
-                <View style={{ gap: 10 }} >
-                    <Title1 title={'Vérification du statut professionnel'} isLeft />
-                    <InputField placeholder="123 456 789"
-                        value={verifId}
-                        title={'Numéro professionnel'}
-                        onChangeText={setVerifId}
-                    />
-                    <SmallText
-                        text="Indiquez votre numéro de carte professionnelle à la chambre du commerce et de l'industrie ou bien votre SIREN/SIRET."
-                        isLeft
-                    />
-                    <SmallText
-                        text="Vous pouvez entrer ces informations ultérieurement, elles seront validé par huntya et vous permettront d'avoir un profil certifié."
-                        isLeft
-                    />
-                </View>
+                {workStatus != -1 &&
+                    <View style={{ gap: 10 }} >
+                        <Title1 title={'Vérification du statut professionnel'} isLeft />
+                        <InputField placeholder="123 456 789"
+                            value={verifId}
+                            title={'Numéro professionnel'}
+                            onChangeText={setVerifId}
+                        />
+                        <SmallText
+                            text={
+                                workStatus == 0 ?
+                                    "Indiquez votre numéro RSAC, SIREN ou SIRET."
+                                    : workStatus == 1 ?
+                                        "Indiquez le numéro SIRET/SIREN de l'agence."
+                                        : ""
+                            }
+                            isLeft
+                        />
+                        <SmallText
+                            text="Vous pouvez entrer cette information ultérieurement, elle sera validée par huntya et vous permettra d'avoir un profil certifié."
+                            isLeft
+                        />
+                    </View>
+                }
             </View>
             <Button title="Suivant" backgroundColor={Colors.mainBlue} textColor={Colors.white}
                 onPress={next} />

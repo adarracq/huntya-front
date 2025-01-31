@@ -8,6 +8,8 @@ import FlashMessage from 'react-native-flash-message';
 import UnLoggedNav from './navigations/UnloggedNav';
 import User from './models/User';
 import 'react-native-get-random-values';
+import BottomTabNav from './navigations/BottomTabNav';
+import { userService } from './services/user.service';
 
 SplashScreen.preventAutoHideAsync();
 SplashScreen.setOptions({
@@ -30,19 +32,32 @@ export default function App() {
 
     // Main
     const [userLoaded, setUserLoaded] = useState(false);
-    const [user, setUser] = useState<User>();
+    const [user, setUser] = useState(null);
 
     // We retrieve the user data in local storage
     function getUserFromStorage() {
         console.log('Getting user from storage...');
         AsyncStorageUser.getUser().then(resp => {
             setUserLoaded(true);
-            if (resp.email)
-                setUser(resp);
-            else
-                setUser(undefined);
-        })
+            console.log('User from storage:', resp);
+            if (resp && resp.email)
+                userService.getByEmail(resp.email)
+                    .then(user => {
+                        setUser(resp);
+                    })
+                    .catch(err => {
+                        console.log('Error getting user:', err);
+                        AsyncStorageUser.Logout();
+                        setUser(null);
+                    });
+            else {
+                console.log('No user/email in storage');
+                AsyncStorageUser.Logout();
+                setUser(null);
+            }
+        });
     }
+
 
     useEffect(() => {
         getUserFromStorage();
@@ -65,9 +80,10 @@ export default function App() {
             value={[user, setUser]}>
             <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
                 {
-                    userLoaded && user ? (
+                    userLoaded && user ?
+                        <BottomTabNav />
+                        :
                         <UnLoggedNav />
-                    ) : <UnLoggedNav />
                 }
                 <FlashMessage position="top" statusBarHeight={10} />
             </View>

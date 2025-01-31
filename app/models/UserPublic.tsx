@@ -1,6 +1,4 @@
-import Agent from "./Agent";
-
-export default class User {
+export default class UserPublic {
     _id: string | null;
     email: string;
     firstname: string | null;
@@ -11,10 +9,6 @@ export default class User {
     languages: number[] | null;
     imageUrl: string | null;
     presentation: string | null;
-    status: string | null; // verify, unverify, pending or banned
-    verified: boolean | null;
-    friends: object[] | null; // TODO : save only email/firsname/lastname/picture
-    agentProperties: Agent | null;
     selected: boolean | null;
 
     constructor(email: string) {
@@ -28,10 +22,6 @@ export default class User {
         this.languages = [];
         this.imageUrl = null;
         this.presentation = null;
-        this.status = null;
-        this.verified = true;
-        this.friends = [];
-        this.agentProperties = null;
         this.selected = false;
     }
 }

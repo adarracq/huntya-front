@@ -1,5 +1,5 @@
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NavParams } from '@/app/navigations/UnloggedNav';
 import { NativeStackScreenProps } from 'react-native-screens/lib/typescript/native-stack/types';
 import Colors from '@/app/constants/Colors';
@@ -12,6 +12,7 @@ import { showMessage } from 'react-native-flash-message';
 import SmallText from '@/app/components/atoms/SmallText';
 import User from '@/app/models/User';
 import LoadingScreen from '@/app/components/molecules/LoadingScreen';
+import { UserContext } from '@/app/contexts/UserContext';
 
 type Props = NativeStackScreenProps<NavParams, 'CheckEmailCode'>;
 export default function CheckEmailCodeScreen({ navigation, route }: Props) {
@@ -22,6 +23,7 @@ export default function CheckEmailCodeScreen({ navigation, route }: Props) {
     const [codeErrorText, setCodeErrorText] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [timerCount, setTimer] = useState(60);
+    const [user, setUser] = useContext(UserContext);
 
     const onCodeChange = (text: string) => {
         setCode(text);
@@ -45,7 +47,10 @@ export default function CheckEmailCodeScreen({ navigation, route }: Props) {
                     if (response.message) {
                         console.log(loginOrSignup);
                         if (loginOrSignup === 'login') {
-                            // TODO: navigate to the app
+                            setUser({
+                                email: email,
+                                type: response.type == 0 ? 'user' : 'agent'
+                            });
                         }
                         else if (loginOrSignup === 'signup') {
                             let user = new User(email);

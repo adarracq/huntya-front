@@ -4,7 +4,7 @@ export default {
         {
             label: 'Basique',
             value: 0,
-            priceLabel: '14,90 €',
+            priceLabel: '19,99 €',
             benefits: [
                 {
                     title: 'Fonctionnalités classiques',
@@ -24,13 +24,13 @@ export default {
             ],
             monthly: {
                 title: 'Mensuel',
-                total: '14,90€',
-                priceLabel: '14,90 € / mois',
+                total: '19,99€',
+                priceLabel: '19,99 € / mois',
             },
             yearly: {
                 title: 'A l\'année',
-                total: '149,90€',
-                priceLabel: '12,49€ / mois (soit 149,90€ par an)',
+                total: '191,80€',
+                priceLabel: '15,99€ / mois (soit 191,80€ par an)',
             },
         },
 
@@ -38,7 +38,7 @@ export default {
         {
             label: 'Premium',
             value: 1,
-            priceLabel: '29,90 €',
+            priceLabel: '39,99 €',
             benefits: [
                 {
                     title: 'Fonctionnalités avancées',
@@ -58,13 +58,13 @@ export default {
             ],
             monthly: {
                 title: 'Mensuel',
-                total: '29,90€',
-                priceLabel: '29,90 € / mois',
+                total: '39,99€',
+                priceLabel: '39,99 € / mois',
             },
             yearly: {
                 title: 'A l\'année',
-                total: '299,90€',
-                priceLabel: '24,90€ / mois (soit 299,90€ par an)',
+                total: '395,88€',
+                priceLabel: '32,99€ / mois (soit 395,88€ par an)',
             },
         },
     ],

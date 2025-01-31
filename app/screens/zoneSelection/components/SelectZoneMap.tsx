@@ -1,7 +1,5 @@
-import { Image, StyleSheet } from 'react-native'
-import React, { Fragment, useContext, useEffect, useRef, useState } from 'react'
-import MapView, { Marker, Polygon } from 'react-native-maps';
-import * as Location from 'expo-location';
+import { StyleSheet } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
 import Zone from '@/app/models/Zone';
 import { geoApiGouvService } from '@/app/services/geoApiGouv';
 import { functions } from '@/app/utils/Functions';
@@ -11,6 +9,7 @@ import Coordinates from '@/app/models/Coordinates';
 import { showMessage } from 'react-native-flash-message';
 import ZoneDrawer from './ZoneDrawer';
 import ZoneDisplayOnMap from '@/app/components/molecules/ZoneDisplayOnMap';
+import MapView from 'react-native-maps';
 
 type Props = {
     coordSearchOrGeoloc?: { latitude: number, longitude: number } | null;
@@ -36,20 +35,11 @@ export default function SelectZoneMap(props: Props) {
     }
 
     // to avoid blinking markers on map and let them load
+    // TODO : find a better way to load markers
     const [avoidBlink, setAvoidBlink] = useState(true);
-    /*useEffect(() => {
-        setTimeout(() => { setAvoidBlink(false) }, 3000);
-    }, []);*/
-
-    /*const getPermissions = async (coordinates: any) => {
-        const { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') {
-            console.log('Please grant permission to access your location.');
-        }
-        else {
-            animateToSelected(coordinates);
-        }
-    }*/
+    useEffect(() => {
+        setTimeout(() => { setAvoidBlink(false) }, 5000);
+    }, []);
 
     function handleRegionChange() {
         //props.onChangeCenter();
@@ -59,55 +49,8 @@ export default function SelectZoneMap(props: Props) {
         //getCommunes(region.latitude, region.longitude);
     }
 
-    // get the zone from the coordinates
-    /*function selectZone(coord: { latitude: number, longitude: number }) {
-        geoApiGouvService.getByCoords(coord.latitude, coord.longitude).then(resp => {
-            // if the zone is a big city, we separate the zones by district else we select the zone
-            separateZonesByDistrict(resp[0], coord);
-        }).catch(err => {
-            console.log(err);
-        });
-    }*
 
-    /*function separateZonesByDistrict(response: any, coord: { latitude: number, longitude: number }) {
-        switch (response.nom) {
-            case "Paris":
-                displayDistricsZonesAndSelectZone(DistrictsParis.districs, coord);
-                break;
-            case "Marseille":
-                displayDistricsZonesAndSelectZone(DistrictsMarseille.districs, coord);
-                break;
-            default:
-                let _zone = new Zone(
-                    response.code,
-                    response.nom,
-                    //manage multiple zones like islands
-                    response.contour.type == "MultiPolygon" ? response.contour.coordinates[0][0] : response.contour.coordinates[0],
-                    response.population,
-                    response.departement.nom,
-                    response.region.nom,
-                );
-                _zone.centre = [coord.latitude, coord.longitude];
-                if (response.population > 50000 && agentData && agentData.plan == 0)
-                    response.limit50000 = true;
 
-                setSelectedZone(_zone);
-                setDistrictZones([]);
-                break;
-        }
-    }*/
-
-    /*function displayDistricsZonesAndSelectZone(districts: Zone[], coord: { latitude: number, longitude: number }) {
-        setDistrictZones(districts);
-        districts.forEach(d => {
-            // we set the center of the district
-            d.centre = [coord.latitude, coord.longitude];
-            // if the coordinates are in a district, we select the district
-            if (functions.coordsIsInZone(coord, d.contour)) {
-                setSelectedZone(d);
-            }
-        });
-    }*/
 
     // animate the map to the selected coordinates
     function animateToSelected(coord: { latitude: number, longitude: number }) {
@@ -165,6 +108,8 @@ export default function SelectZoneMap(props: Props) {
                     resp[0].population,
                     resp[0].departement.nom,
                     resp[0].region.nom,
+                    0, //nbContacts
+                    0, //nbProjets
                     true, //isNew
                     false //isSelected
                 );
@@ -197,7 +142,6 @@ export default function SelectZoneMap(props: Props) {
         zoneService.getAll().then(resp => {
             setLoading(false);
             setBddZones(resp);
-            setAvoidBlink(false);
         }).catch(err => {
             setLoading(false);
             console.log(err);

@@ -1,18 +1,15 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
 import Zone from '@/app/models/Zone';
 import FloatingBottomArea from '../molecules/FloatingBottomArea';
 import DeletableField from '../molecules/DeletableField';
 import SearchAddress from './SearchAddress';
 import LoadingScreen from '../molecules/LoadingScreen';
 import Coordinates from '@/app/models/Coordinates';
-import * as Location from 'expo-location';
-import Address from '@/app/models/Address';
 import SelectZoneMap from '@/app/screens/zoneSelection/components/SelectZoneMap';
 import GeolocationBtn from './GeolocationBtn';
 import ValidateZoneDrawer from '@/app/screens/zoneSelection/components/ValidateZoneDrawer';
 import { zoneService } from '@/app/services/zone.service';
-import DistrictsParis from '@/app/constants/districs/DistrictsParis';
 
 type Props = {
     nbZones: number;
@@ -47,17 +44,14 @@ export default function SelectZonesScreen(props: Props) {
     function checkIfAllZonesSelected(zones: (Zone | null)[]) {
         if (zones.every(zone => zone != null)) {
             setShowValidateDrawer(!showValidateDrawer);
-            console.log('all zones selected');
             return true;
         }
-        console.log('not all zones selected');
         return false;
     }
 
     function addToBddNewZones(zones: Zone[]) {
         // first we create an array of zone with the property isNew set to true
         const newZones = zones.map(zone => ({ ...zone, isNew: true }));
-        console.log(newZones);
         // then we add them to the bdd
         if (newZones.length > 0) {
             zoneService.createMany(newZones)
@@ -69,16 +63,8 @@ export default function SelectZonesScreen(props: Props) {
                 });
         }
     }
-
-    function add() {
-        /*zoneService.createMany(DistrictsParis.districs)
-            .then(() => {
-                console.log('new zones added to bdd');
-            })
-            .catch((error) => {
-                console.log(error);
-            });*/
-
+    // DO NOT USE THIS FUNCTION
+    /*function add() {
         DistrictsParis.districs.forEach(zone => {
             zoneService.create(zone)
                 .then(() => {
@@ -93,6 +79,7 @@ export default function SelectZonesScreen(props: Props) {
         console.log('add');
         //add();
     }, []);
+    */
 
     return (
         <View style={styles.container}>

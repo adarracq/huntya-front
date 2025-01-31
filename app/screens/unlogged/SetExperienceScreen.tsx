@@ -35,7 +35,6 @@ export default function SetExperienceScreen({ navigation, route }: Props) {
             user.agentProperties.experience = experience;
         }
         setLoading(true);
-        console.log(user);
         userService.update({ user })
             .then((response) => {
                 setLoading(false);
