@@ -83,7 +83,7 @@ export default function ProfileScreen({ navigation, route }: Props) {
                     user.type == 'agent' ?
                         <>
                             <MenuItem
-                                onPress={() => console.log('onPress')}
+                                onPress={() => navigation.navigate('EditProData', { user: userData })}
                                 text={'Informations professionnelles'}
                                 icon={'briefcase'}
                             />

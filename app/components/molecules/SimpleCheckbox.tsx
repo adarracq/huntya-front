@@ -3,9 +3,11 @@ import React from 'react'
 import Colors from '../../constants/Colors';
 import BodyText from '../atoms/BodyText';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { functions } from '@/app/utils/Functions';
 
 type Props = {
   title: string;
+  icon?: string;
   onPress: () => void;
   selected: boolean;
 }
@@ -14,7 +16,13 @@ export default function SimpleCheckbox(props: Props) {
   return (
     <TouchableOpacity onPress={props.onPress}
       style={styles.container}>
-      <BodyText text={props.title} isMedium />
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        {
+          props.icon &&
+          <Image source={functions.getIconSource(props.icon)} style={{ width: 20, height: 20 }} />
+        }
+        <BodyText text={props.title} isMedium />
+      </View>
       {
         props.selected ?
           <MaterialCommunityIcons name="checkbox-marked" size={20} color={Colors.mainBlueLight} />

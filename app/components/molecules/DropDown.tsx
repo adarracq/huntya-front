@@ -90,6 +90,7 @@ export default function DropDown(props: DropDownProps) {
                                     <SimpleCheckbox
                                         key={index}
                                         title={item.label}
+                                        icon={item.icon ? item.icon : null}
                                         selected={!!props.selectedItemIds && props.selectedItemIds.includes(item.id)}
                                         onPress={() => {
                                             props.onSelectItem(item);

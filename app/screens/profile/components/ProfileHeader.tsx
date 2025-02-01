@@ -105,9 +105,9 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         backgroundColor: Colors.mainBlue,
         alignItems: 'center',
-        padding: 12,
-        marginTop: -90,
-        marginLeft: 80,
+        padding: 8,
+        marginTop: -80,
+        marginLeft: 100,
     },
     camera: {
         width: 20,

@@ -23,12 +23,11 @@ const Tab = createBottomTabNavigator<BottomNavParams>();
 export default function BottomTabNav() {
     const [user, setUser] = useContext(UserContext);
 
-    const noTabBarScreens = ['EditPersonalData'];
+    const noTabBarScreens = ['EditPersonalData', 'EditProData'];
     return (
         <Tab.Navigator
             initialRouteName="Map"
             screenOptions={(props) => {
-                console.log(getFocusedRouteNameFromRoute(props.route));
                 return {
                     headerShown: false,
                     tabBarShowLabel: false,

@@ -3,6 +3,7 @@ import Subscription from "./Subcription";
 export default class Agent {
     workStatus: number | null; // 0: Salarié, 1: Indépendant
     network: string | null;
+    url: string | null;
     specialities: number[] | null;
     experience: number | null;
     zonesId: number[] | null;
@@ -15,6 +16,7 @@ export default class Agent {
     constructor() {
         this.workStatus = null;
         this.network = null;
+        this.url = null
         this.specialities = null;
         this.experience = null;
         this.zonesId = [];
