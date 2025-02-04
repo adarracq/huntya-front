@@ -95,14 +95,14 @@ export default function ProfileScreen({ navigation, route }: Props) {
                             />
                             <View style={styles.divider} />
                             <MenuItem
-                                onPress={() => console.log('onPress')}
+                                onPress={() => navigation.navigate('EditPlan', { user: userData })}
                                 text={'Mon abonnement'}
                                 icon={'credit-card'}
                             />
                         </>
                         :
                         <MenuItem
-                            onPress={() => console.log('onPress')}
+                            onPress={() => navigation.navigate('MyProjects', { user: userData })}
                             text={'Mes projets'}
                             icon={'home'}
                         />

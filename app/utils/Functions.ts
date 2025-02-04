@@ -1,4 +1,5 @@
 import { Alert } from "react-native";
+import Address from "../models/Address";
 
 export const functions = {
     getIconSource,
@@ -8,6 +9,8 @@ export const functions = {
     dateToString,
     dateToStringWithDayOfWeek,
     getAgeFromBirthdate,
+    getStringAddress,
+    getStringDateDifference,
 }
 
 function getIconSource(name: string) {
@@ -166,5 +169,42 @@ function getAgeFromBirthdate(date: Date) {
     }
 
     return age;
+}
+
+function getStringAddress(address: Address | null): string {
+    if (!address) return 'Adresse non renseignée';
+    let res = '';
+    if (address.streetNumber) {
+        res += address.streetNumber + ' ';
+    }
+    if (address.street) {
+        res += address.street + ', ';
+    }
+    if (address.postalCode) {
+        res += address.postalCode + ' ';
+    }
+    if (address.city) {
+        res += address.city;
+    }
+    return res;
+}
+
+// return Il y a ... jours ou heures from YYYY-MM-DDTHH:MM:SS.mmmZ
+function getStringDateDifference(date: Date): string {
+    // Convertir les arguments en objets Date si nécessaire
+    const now = new Date();
+    if (typeof date === 'string' || typeof date === 'number') {
+        date = new Date(date);
+    }
+
+    // Vérifiez que les dates sont valides
+    if (!(date instanceof Date) || isNaN(date.getTime())) {
+        throw new Error('date is not a valid date');
+    }
+
+    const diffTime = Math.abs(now.getTime() - date.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    return `Il y a ${diffDays} jours`;
 }
 

@@ -9,6 +9,7 @@ import Colors from '@/app/constants/Colors';
 
 type Props = {
     onSelectAddress: (coords: Coordinates, address: any) => void;
+    searchBarStyle?: ViewStyle;
     //isSearching: (isSearching: boolean) => void;
 }
 export default function SearchAddress(props: Props) {
@@ -35,7 +36,7 @@ export default function SearchAddress(props: Props) {
 
     if (!isFocused) {
         return (
-            <View style={styles.searchBarContainer}>
+            <View style={[styles.searchBarContainer, props.searchBarStyle]}>
                 <Pressable
                     onPress={() => {
                         setIsFocused(true);
@@ -56,18 +57,28 @@ export default function SearchAddress(props: Props) {
                     onPress={() => {
                         setIsFocused(false);
                     }}
-                    style={styles.backArrow}
+                    style={[styles.backArrow, {
+                        top: props.searchBarStyle ? -4 : 36,
+                        left: props.searchBarStyle ? -20 : 0,
+                    }]}
                 >
                     <Image
                         source={functions.getIconSource('arrow-left0')}
                         style={{ width: 20, height: 20, tintColor: Colors.darkGrey, marginLeft: 8 }}
                     />
                 </TouchableOpacity>
-                <View style={styles.searchBarContainer}>
+                <View style={[styles.searchBarContainer, props.searchBarStyle]}>
                     <View style={[styles.searchBar, styles.searchBarFocused]}>
                     </View>
                 </View>
-                <View style={{ padding: 20, flex: 1, zIndex: 2 }} >
+                <View style={{
+                    position: props.searchBarStyle ? 'relative' : 'fixed',
+                    top: props.searchBarStyle ? -70 : null,
+                    left: props.searchBarStyle ? 20 : null,
+                    padding: 20,
+                    flex: 1,
+                    zIndex: 2
+                }} >
                     <GooglePlacesAutocomplete
                         placeholder='Rechercher une adresse...'
                         minLength={4} // minimum length of text to search
@@ -84,8 +95,8 @@ export default function SearchAddress(props: Props) {
                             fontFamily: 'text-regular',
                             backgroundColor: 'transparent',
                             height: 50,
-                            marginLeft: 40,
-                            marginTop: 20,
+                            marginLeft: props.searchBarStyle ? 0 : 40,
+                            marginTop: props.searchBarStyle ? 0 : 20,
                             zIndex: 1,
                         }}
                         styles={{

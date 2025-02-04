@@ -1,12 +1,10 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import User from '@/app/models/User';
 import { functions } from '@/app/utils/Functions';
-import Title1 from '@/app/components/atoms/Title1';
 import Colors from '@/app/constants/Colors';
 import BodyText from '@/app/components/atoms/BodyText';
 import * as ImagePicker from 'expo-image-picker';
-import { userService } from '@/app/services/user.service';
 import Title0 from '@/app/components/atoms/Title0';
 
 type Props = {

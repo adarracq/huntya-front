@@ -13,16 +13,19 @@ type ButtonProps = {
   textColor?: any;
   noShadow?: boolean;
   style?: ViewStyle;
+  disabled?: boolean;
 }
 
 export default function Button(props: ButtonProps) {
   return (
-    <TouchableOpacity onPress={props.onPress}
+    <TouchableOpacity onPress={
+      props.disabled ? () => { } : props.onPress
+    }
       style={[{
         borderRadius: 16,
         height: 54,
         width: '100%',
-        backgroundColor: props.backgroundColor,
+        backgroundColor: props.disabled ? Colors.lightGrey : props.backgroundColor,
         display: 'flex',
         justifyContent: 'center',
         shadowColor: "#000000",
@@ -41,13 +44,13 @@ export default function Button(props: ButtonProps) {
           style={{
             width: 24,
             height: 24,
-            tintColor: props.iconColor ? props.iconColor : null,
+            tintColor: props.disabled ? Colors.white : props.iconColor ? props.iconColor : null,
             position: 'absolute',
             left: 20
           }} />
       }
 
-      <Title2 title={props.title} color={props.textColor ? props.textColor : Colors.black} />
+      <Title2 title={props.title} color={props.disabled ? Colors.white : props.textColor ? props.textColor : Colors.black} />
 
     </TouchableOpacity>
   )

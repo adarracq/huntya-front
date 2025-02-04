@@ -23,7 +23,7 @@ export default function EmailInputScreen({ navigation, route }: Props) {
 
     function onEmailChange(text: string) {
 
-        setEmail(text);
+        setEmail(text.toLowerCase());
 
         if (!text || text === '') {
             setEmailErrorText('Veuillez entrer un email');

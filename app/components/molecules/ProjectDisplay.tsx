@@ -1,0 +1,54 @@
+import { View, Text, StyleSheet } from 'react-native'
+import React from 'react'
+import Project from '@/app/models/Project';
+import Colors from '@/app/constants/Colors';
+import ProjectDetails from '@/app/constants/ProjectDetails';
+import SmallText from '../atoms/SmallText';
+import Title2 from '../atoms/Title2';
+import { functions } from '@/app/utils/Functions';
+import BodyText from '../atoms/BodyText';
+
+type Props = {
+    project: Project;
+    withUserName?: boolean;
+    onPress?: () => void;
+}
+export default function ProjectDisplay(props: Props) {
+    return (
+        <View style={styles.container}>
+            <View style={{
+                borderRadius: 100,
+                backgroundColor: ProjectDetails.types[props.project.type].color,
+                alignSelf: 'flex-start',
+                paddingHorizontal: 12,
+                paddingVertical: 4,
+            }}>
+                <BodyText text={ProjectDetails.types[props.project.type].label2} color={Colors.white} isMedium />
+            </View>
+            <Title2 title={props.project.addressString || 'Adresse inconnue'} isLeft />
+            {props.project.date && <BodyText text={functions.getStringDateDifference(props.project.date)} color={Colors.darkGrey} />}
+            {
+                props.withUserName &&
+                <>
+                    <View style={styles.horizontalDivider} />
+                    <BodyText text={`Par ${props.project.user_firstname}`} color={Colors.mainBlue} />
+                </>
+            }
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    container: {
+        borderRadius: 12,
+        borderColor: Colors.veryLightGrey,
+        borderWidth: 1,
+        padding: 12,
+        gap: 8,
+    },
+    horizontalDivider: {
+        height: 1,
+        backgroundColor: Colors.veryLightGrey,
+        marginVertical: 12,
+    }
+})

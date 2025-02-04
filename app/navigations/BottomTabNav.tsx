@@ -23,7 +23,16 @@ const Tab = createBottomTabNavigator<BottomNavParams>();
 export default function BottomTabNav() {
     const [user, setUser] = useContext(UserContext);
 
-    const noTabBarScreens = ['EditPersonalData', 'EditProData'];
+    const noTabBarScreens = [
+        'EditPersonalData',
+        'EditProData',
+        'EditPlan',
+        'MyProjects',
+        'NewProject0Type',
+        'NewProject1Zone',
+        'NewProject2Details',
+        'NewProject3Descr',
+    ];
     return (
         <Tab.Navigator
             initialRouteName="Map"

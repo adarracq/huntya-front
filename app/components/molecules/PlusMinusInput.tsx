@@ -1,4 +1,4 @@
-import { View, ViewStyle } from 'react-native'
+import { TouchableOpacity, View, ViewStyle } from 'react-native'
 import React from 'react'
 import Colors from '../../constants/Colors';
 import Title1 from '../atoms/Title1';
@@ -24,7 +24,7 @@ export default function PlusMinusInput(props: PlusMinusInputProps) {
                 height: 50,
             }]}
         >
-            <View style={{
+            <TouchableOpacity style={{
                 width: 40,
                 height: 40,
                 borderRadius: 12,
@@ -32,21 +32,21 @@ export default function PlusMinusInput(props: PlusMinusInputProps) {
                 borderColor: props.value > props.minVal ? Colors.mainBlue : Colors.lightGrey,
                 padding: 8
 
-            }} >
+            }}
+                onPress={() => {
+                    if (props.value > props.minVal)
+                        props.onChangeValue(props.value - 1);
+                }}
+                onLongPress={() => {
+                    if (props.value > props.minVal + 10)
+                        props.onChangeValue(props.value - 10);
+                }}>
                 <AntDesign name="minus" size={24}
                     color={props.value > props.minVal ? Colors.mainBlue : Colors.lightGrey}
-                    onPress={() => {
-                        if (props.value > props.minVal)
-                            props.onChangeValue(props.value - 1);
-                    }}
-                    onLongPress={() => {
-                        if (props.value > props.minVal + 10)
-                            props.onChangeValue(props.value - 10);
-                    }}
                 />
-            </View>
+            </TouchableOpacity>
             <Title1 title={props.value.toString()} style={{ width: 30 }} />
-            <View style={{
+            <TouchableOpacity style={{
                 width: 40,
                 height: 40,
                 borderRadius: 12,
@@ -54,20 +54,21 @@ export default function PlusMinusInput(props: PlusMinusInputProps) {
                 borderColor: props.value < props.maxVal ? Colors.mainBlue : Colors.lightGrey,
                 padding: 8
 
-            }} >
+            }}
+                onPress={() => {
+                    if (props.value < props.maxVal)
+                        props.onChangeValue(props.value + 1);
+                }}
+                // make it increase exponentially when keeping the button pressed
+                onLongPress={() => {
+                    if (props.value < props.maxVal)
+                        props.onChangeValue(props.value + 10);
+                }}
+            >
                 <AntDesign name="plus" size={24}
                     color={props.value < props.maxVal ? Colors.mainBlue : Colors.lightGrey}
-                    onPress={() => {
-                        if (props.value < props.maxVal)
-                            props.onChangeValue(props.value + 1);
-                    }}
-                    // make it increase exponentially when keeping the button pressed
-                    onLongPress={() => {
-                        if (props.value < props.maxVal)
-                            props.onChangeValue(props.value + 10);
-                    }}
                 />
-            </View>
+            </TouchableOpacity>
         </View>
     )
 }
