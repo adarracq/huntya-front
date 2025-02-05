@@ -62,8 +62,8 @@ export default function ZoneDrawer(props: Props) {
                                 <View style={styles.iconContainer}>
                                     <Image source={functions.getIconSource('home')} style={styles.icon} />
                                 </View>
-                                <Title2 title={props.zone.nbProjets > 0 ?
-                                    props.zone.nbProjets + ' projets publiés' : 'Aucun projet publié'} />
+                                <Title2 title={props.zone.nbProjects > 0 ?
+                                    props.zone.nbProjects + ' projets publiés' : 'Aucun projet publié'} />
                             </View>
                             <View style={styles.lineContainer}>
                                 <View style={styles.iconContainer}>

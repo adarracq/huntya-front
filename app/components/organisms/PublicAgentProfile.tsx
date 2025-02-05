@@ -12,6 +12,9 @@ import { projectService } from '@/app/services/project.service';
 import Project from '@/app/models/Project';
 import ProjectDisplay from '../molecules/ProjectDisplay';
 import IconTitleValueContainer from '../molecules/IconTitleValueContainer';
+import AgentSpecialities from '@/app/constants/AgentSpecialities';
+import SmallText from '../atoms/SmallText';
+import { showMessage } from 'react-native-flash-message';
 
 type Props = {
     user: User;
@@ -32,6 +35,29 @@ export default function PublicAgentProfile(props: Props) {
         return res;
     }
 
+    function onClickLink() {
+        {
+            if (!props.user.agentProperties?.url || props.user.agentProperties?.url === '') {
+                showMessage({
+                    message: "Erreur",
+                    description: props.user.firstname + " n'a pas renseigné de site web",
+                    type: "warning",
+                });
+            }
+            else
+                Linking.openURL(props.user.agentProperties?.url || 'https://www.google.com')
+                    .then(() => console.log('success'))
+                    .catch(() => {
+                        showMessage({
+                            message: "Erreur",
+                            description: "Le site web renseigné par " + props.user.firstname + " n'est pas valide",
+                            type: "warning",
+                        });
+                    });
+
+        }
+    }
+
 
     return (
         <View style={styles.container}>
@@ -45,6 +71,7 @@ export default function PublicAgentProfile(props: Props) {
                         <Image source={functions.getIconSource('star')} style={{ width: 20, height: 20, tintColor: Colors.mainBlue }} />
                         <Title2 title={'4.5/5'} isLeft color={Colors.mainBlue} />
                     </View>
+                    <Title0 title={getFirstNameAndAge()} isLeft />
                 </View>
                 {props.user.languages &&
                     <View style={styles.languagesContainer}>
@@ -58,8 +85,20 @@ export default function PublicAgentProfile(props: Props) {
                     </View>
                 }
             </View>
-            <Title0 title={getFirstNameAndAge()} isLeft />
-            <ScrollView contentContainerStyle={{ gap: 24, paddingBottom: 100 }}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 12 }}>
+                {props.user.agentProperties?.specialities?.map((speciality, index) => (
+                    <View key={index} style={{
+                        borderRadius: 100,
+                        backgroundColor: Colors.mainBlue,
+                        alignContent: 'center',
+                        justifyContent: 'center',
+                        paddingHorizontal: 12,
+                    }}>
+                        <SmallText text={AgentSpecialities.specialities[speciality].label.toLocaleUpperCase()} color={Colors.white} isBold />
+                    </View>
+                ))}
+            </ScrollView>
+            <ScrollView contentContainerStyle={{ gap: 24, paddingBottom: 100, paddingHorizontal: 20 }}>
                 {
                     props.user.presentation && props.user.presentation.length > 0 &&
                     <View style={styles.presContainer}>
@@ -80,7 +119,7 @@ export default function PublicAgentProfile(props: Props) {
                                 value={props.user.agentProperties.network || ''} />
                             <IconTitleValueContainer icon='link' title='Site web'
                                 value={'Visiter le site'}
-                                onClickLink={() => Linking.openURL(props.user.agentProperties?.url || 'https://www.google.com')} />
+                                onClickLink={onClickLink} />
 
                         </View>
                     </View>
@@ -102,13 +141,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.white,
-        padding: 20,
         paddingTop: 70,
-        gap: 24
+        gap: 12
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        paddingHorizontal: 20,
     },
     noteContainer: {
         flexDirection: 'row',
@@ -146,5 +185,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 35,
         left: 20,
+        width: Dimensions.get('window').width - 40,
     }
 })

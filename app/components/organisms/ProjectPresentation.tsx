@@ -11,6 +11,7 @@ import UserSeeprofileBtn from '../molecules/UserSeeprofileBtn';
 import ProjectRoomEct from './ProjectRoomEct';
 import { ScrollView } from 'react-native-gesture-handler';
 import Button from '../atoms/Button';
+import SmallText from '../atoms/SmallText';
 
 type Props = {
     project: Project;
@@ -83,7 +84,7 @@ export default function ProjectPresentation(props: Props) {
                         paddingHorizontal: 12,
                         paddingVertical: 4,
                     }}>
-                        <BodyText text={ProjectDetails.types[props.project.type].label2} color={Colors.white} isMedium />
+                        <SmallText text={ProjectDetails.types[props.project.type].label.toLocaleUpperCase()} color={Colors.white} isBold />
                     </View>
                     <Title0 title={props.project.addressString || 'Adresse inconnue'} isLeft />
                     {props.project.date && <BodyText text={functions.getStringDateDifference(props.project.date)} color={Colors.darkGrey} />}

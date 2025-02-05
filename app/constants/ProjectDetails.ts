@@ -4,10 +4,10 @@ export default {
     types: [
         // -2 user speaking with agent (no type defined)
         // -1 agent 
-        { id:0,label: 'Achat',label2:'ACHAT', value: 0, title: "Projet d'achat", selected: true, color: Colors.lightGreen },
-        { id:1,label: 'Vente',label2:'VENTE', value: 1, title: "Projet de vente", selected: true, color: Colors.mainRed },
-        { id:2,label: 'Location',label2:'LOCATION', value: 2, title: "Projet de location", selected: true, color: Colors.mainBlueLight },
-        { id:3,label: 'Gestion locative', label2:'GESTION LOCATIVE', value: 3, title: "Projet de gestion locative", selected: true, color: Colors.mainBlueDark },
+        { id:0,label: 'Achat', value: 0, title: "Projet d'achat", selected: true, color: Colors.lightGreen },
+        { id:1,label: 'Vente', value: 1, title: "Projet de vente", selected: true, color: Colors.mainRed },
+        { id:2,label: 'Location', value: 2, title: "Projet de location", selected: true, color: Colors.mainBlueLight },
+        { id:3,label: 'Gestion locative', value: 3, title: "Projet de gestion locative", selected: true, color: Colors.mainBlueDark },
     ],
     categories: [
         { id:0,label: 'Appartement', value: 0, balcony: true, garden: false, rooms: true, parking: true },

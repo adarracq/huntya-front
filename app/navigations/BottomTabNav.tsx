@@ -7,6 +7,8 @@ import TabBarElement from '../components/molecules/TabBarElement';
 import CalendarNav from './CalendarNav';
 import ProfileNav from './ProfileNav';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import AgentMapNav from './AgentMapNav';
+import UserMapNav from './UserMapNav';
 
 export type BottomNavParams = {
     Project: undefined;
@@ -68,8 +70,7 @@ export default function BottomTabNav() {
             />
             <Tab.Screen
                 name="Map"
-                //component={user && user.type == 'agent' ? AgentMapNav : UserMapNav}
-                component={CalendarNav}
+                component={user && user.type == 'agent' ? AgentMapNav : UserMapNav}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         TabBarElement({

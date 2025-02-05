@@ -87,7 +87,8 @@ export default function SelectProjectDetails(props: Props) {
                         <DoubleSlider
                             title='Surface terrain (m²)'
                             min={0}
-                            max={100000}
+                            max={1000}
+                            step={10}
                             minValue={props.project.gardenSurfaceMin ? props.project.gardenSurfaceMin : 0}
                             maxValue={props.project.gardenSurfaceMax ? props.project.gardenSurfaceMax : 100000}
                             onChange={props.onChangeGardenSurfaceMinMax}
@@ -98,7 +99,7 @@ export default function SelectProjectDetails(props: Props) {
                             value={props.project.gardenSurface ? props.project.gardenSurface : 0}
                             onChange={props.onChangeGardenSurface}
                             min={0}
-                            max={10000}
+                            max={1000}
                             step={10}
                         />
                     :

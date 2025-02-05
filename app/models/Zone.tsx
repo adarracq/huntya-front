@@ -6,7 +6,7 @@ export default class Zone {
     population: number;
     departement: string;
     region: string;
-    nbProjets: number;
+    nbProjects: number;
     nbContacts: number;
     isNew: boolean;
     isSelected: boolean;
@@ -19,7 +19,7 @@ export default class Zone {
         this.population = population;
         this.departement = departement;
         this.region = region;
-        this.nbProjets = nbProjects;
+        this.nbProjects = nbProjects;
         this.nbContacts = nbContacts;
         this.isNew = isNew;
         this.isSelected = isSelected;

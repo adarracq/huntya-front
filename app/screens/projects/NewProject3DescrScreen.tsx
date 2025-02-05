@@ -12,6 +12,8 @@ import Button from '@/app/components/atoms/Button';
 import { projectService } from '@/app/services/project.service';
 import LoadingScreen from '@/app/components/molecules/LoadingScreen';
 import { showMessage } from 'react-native-flash-message';
+import { zoneService } from '@/app/services/zone.service';
+import Project from '@/app/models/Project';
 type Props = NativeStackScreenProps<ProfileNavParams, 'NewProject3Descr'>;
 export default function NewProject3DescrScreen({ navigation, route }: Props) {
 
@@ -21,6 +23,20 @@ export default function NewProject3DescrScreen({ navigation, route }: Props) {
     const create = () => {
         let project = { ...route.params.project, description, date: new Date() };
         setLoading(true);
+        // first we add the zone if project is in a zone
+        zoneService.getZoneFromCoords(project.coords)
+            .then((zone) => {
+                project.zoneId = zone;
+                create1(project);
+            })
+            .catch((error) => {
+                console.log(error);
+                create1(project);
+            });
+    }
+
+    const create1 = (project: {}) => {
+        console.log('project', project);
         projectService.create(project)
             .then(() => {
                 setLoading(false);
@@ -42,6 +58,7 @@ export default function NewProject3DescrScreen({ navigation, route }: Props) {
                 });
             })
     }
+
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 30, left: 20 }}>

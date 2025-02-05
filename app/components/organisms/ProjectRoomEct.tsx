@@ -17,32 +17,6 @@ export default function ProjectRoomEct(props: Props) {
     const [elements, setElements] = useState<{ title: string; icon: string; value: string | number | null; }[]>([]);
 
 
-    const iconTitleValue = (icon: string, title: string, value: string) => {
-        return (
-
-            <View style={{ flexDirection: 'column', alignContent: 'flex-start', gap: 8 }}>
-                <View style={{
-                    width: 40,
-                    height: 40,
-                    backgroundColor: Colors.lightBlue,
-                    borderRadius: 8,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                    <Image source={functions.getIconSource(icon)} style={{
-                        width: 20,
-                        height: 20,
-                        tintColor: Colors.mainBlue,
-                    }} />
-                </View>
-                <View>
-                    <SmallText text={title} isLeft />
-                    <Title2 title={value} isLeft />
-                </View>
-            </View>
-        )
-    }
-
     function setElementsToDisplay() {
         let type = props.project.type;
         let isAchatOrLoc = type === 0 || type === 2;
@@ -72,7 +46,7 @@ export default function ProjectRoomEct(props: Props) {
         let eSurface = {
             title: isAchatOrLoc ? 'Surface' : 'Surface',
             icon: 'cube',
-            value: isAchatOrLoc ? props.project.surface + 'm²' : props.project.surfaceMin + 'm² - ' + props.project.surfaceMax + 'm²'
+            value: !isAchatOrLoc ? props.project.surface + 'm²' : props.project.surfaceMin + 'm² - ' + props.project.surfaceMax + 'm²'
         }
         _elements.push(eSurface);
 
@@ -80,7 +54,7 @@ export default function ProjectRoomEct(props: Props) {
             let eGarden = {
                 title: isAchatOrLoc ? 'Surface jardin' : 'Surface jardin',
                 icon: 'tree',
-                value: isAchatOrLoc ? props.project.gardenSurface + 'm²' : props.project.gardenSurfaceMin + 'm² - ' + props.project.gardenSurfaceMax + 'm²'
+                value: !isAchatOrLoc ? props.project.gardenSurface + 'm²' : props.project.gardenSurfaceMin + 'm² - ' + props.project.gardenSurfaceMax + 'm²'
             }
             _elements.push(eGarden);
         }
@@ -104,7 +78,7 @@ export default function ProjectRoomEct(props: Props) {
             let ePrice = {
                 title: 'Budget',
                 icon: 'dollar',
-                value: functions.separateThousands(props.project.budgetMin) + '€ - ' + functions.separateThousands(props.project.budgetMax) + '€'
+                value: functions.separateThousands(props.project.budgetMin) + '€ \n' + functions.separateThousands(props.project.budgetMax) + '€'
             }
             _elements.push(ePrice);
         }

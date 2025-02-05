@@ -6,6 +6,7 @@ export const zoneService = {
     getAll,
     create,
     createMany,
+    getZoneFromCoords,
 };
 
 function getAll() {
@@ -18,4 +19,8 @@ function create(params: any) {
 
 function createMany(params: any) {
     return fetchWrapper.post(baseUrl + '/many', params);
+}
+
+function getZoneFromCoords(coords: any) {
+    return fetchWrapper.put(baseUrl + '/coords', coords);
 }
