@@ -101,6 +101,30 @@ function getIconSource(name: string) {
             return require('../assets/icons/plus.png');
         case 'camera':
             return require('../assets/icons/camera.png');
+        case 'marker-project':
+            return require('../assets/icons/marker-project.png');
+        case 'bed' :
+            return require('../assets/icons/bed.png');
+        case 'shower':
+            return require('../assets/icons/shower.png');
+        case 'car':
+            return require('../assets/icons/car.png');
+        case 'cube':
+            return require('../assets/icons/cube.png');
+        case 'quotes' :
+            return require('../assets/icons/quotes.png');
+        case 'tree':
+            return require('../assets/icons/tree.png');
+        case 'balcony':
+            return require('../assets/icons/balcony.png');
+        case 'dollar':
+            return require('../assets/icons/dollar.png');
+        case 'link':
+            return require('../assets/icons/link.png');
+        case 'network':
+            return require('../assets/icons/network.png');
+        case 'star':
+            return require('../assets/icons/star.png');
         default:
             return require('../assets/icons/none.png');
     }
@@ -203,7 +227,19 @@ function getStringDateDifference(date: Date): string {
     }
 
     const diffTime = Math.abs(now.getTime() - date.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) - 1;
+
+    // Si la différence est de moins de 1 heure, on affiche les minutes
+    if(diffTime < 1000 * 60 * 60) {
+        const diffMinutes = Math.ceil(diffTime / (1000 * 60));
+        return `Il y a ${diffMinutes} minutes`;
+    }
+
+    // Si la différence est de moins de 1 jour, on affiche les heures
+    if (diffDays < 1) {
+        const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+        return `Il y a ${diffHours} heures`;
+    }
 
     return `Il y a ${diffDays} jours`;
 }

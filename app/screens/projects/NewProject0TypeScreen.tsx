@@ -28,7 +28,8 @@ export default function NewProject0TypeScreen({ navigation, route }: Props) {
         let project = new Project(
             route.params.user._id,
             route.params.user.firstname,
-            route.params.user.email
+            route.params.user.email,
+            route.params.user.imageUrl ?? '',
         );
         project.type = type;
         project.categorie = categorie;

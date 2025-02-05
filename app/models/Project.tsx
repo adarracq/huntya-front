@@ -6,6 +6,7 @@ export default class Project {
     user_id: string;
     user_firstname: string;
     user_email: string;
+    user_imageUrl: string | null;
     date: Date | null;
     type: number; // see in Constants/ProjectDetails.ts
     categorie: number; // see in Constants/ProjectDetails.ts
@@ -34,11 +35,13 @@ export default class Project {
         user_id: string,
         user_firstname: string,
         user_email: string,
+        user_imageUrl: string,
     ) {
         this._id = null;
         this.user_id = user_id;
         this.user_firstname = user_firstname;
         this.user_email = user_email;
+        this.user_imageUrl = user_imageUrl;
         this.date = null;
         this.type = 0;
         this.categorie = 0;

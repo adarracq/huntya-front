@@ -61,7 +61,11 @@ export default function MyProjectsScreens({ navigation, route }: Props) {
             <ScrollView contentContainerStyle={{ gap: 20 }}>
                 {
                     projects.map((project, index) => (
-                        <ProjectDisplay key={index} project={project} />
+                        <ProjectDisplay
+                            key={index}
+                            project={project}
+                            onPress={() => navigation.navigate('SeeProject', { project: project })}
+                        />
                     ))
                 }
             </ScrollView>

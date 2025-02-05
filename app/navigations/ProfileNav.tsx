@@ -11,6 +11,9 @@ import NewProject2DetailsScreen from '../screens/projects/NewProject2DetailsScre
 import NewProject0TypeScreen from '../screens/projects/NewProject0TypeScreen';
 import NewProject3DescrScreen from '../screens/projects/NewProject3DescrScreen';
 import Project from '../models/Project';
+import SeeProjectScreen from '../screens/projects/SeeProjectScreen';
+import UserPublicProfileScreen from '../screens/projects/UserPublicProfileScreen';
+import AgentPublicProfileScreen from '../screens/projects/AgentPublicProfileScreen';
 
 export type ProfileNavParams = {
     HomeProfile: undefined;
@@ -22,6 +25,9 @@ export type ProfileNavParams = {
     NewProject1Zone: { project: Project }
     NewProject2Details: { project: Project }
     NewProject3Descr: { project: Project }
+    SeeProject: { project: Project }
+    UserPublicProfile: { email: string };
+    AgentPublicProfile: { user: User };
 };
 
 const Stack = createStackNavigator<ProfileNavParams>();
@@ -39,6 +45,9 @@ export default function ProfileNav() {
             <Stack.Screen name="NewProject1Zone" component={NewProject1ZoneScreen} options={{ headerShown: false }} />
             <Stack.Screen name="NewProject2Details" component={NewProject2DetailsScreen} options={{ headerShown: false }} />
             <Stack.Screen name="NewProject3Descr" component={NewProject3DescrScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="SeeProject" component={SeeProjectScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="UserPublicProfile" component={UserPublicProfileScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="AgentPublicProfile" component={AgentPublicProfileScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

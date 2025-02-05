@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import Project from '@/app/models/Project';
 import Colors from '@/app/constants/Colors';
@@ -15,7 +15,7 @@ type Props = {
 }
 export default function ProjectDisplay(props: Props) {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={props.onPress}>
             <View style={{
                 borderRadius: 100,
                 backgroundColor: ProjectDetails.types[props.project.type].color,
@@ -31,10 +31,14 @@ export default function ProjectDisplay(props: Props) {
                 props.withUserName &&
                 <>
                     <View style={styles.horizontalDivider} />
-                    <BodyText text={`Par ${props.project.user_firstname}`} color={Colors.mainBlue} />
+                    <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
+                        <Image source={{ uri: props.project.user_imageUrl ?? '' }} style={styles.userImage} />
+
+                        <BodyText text={props.project.user_firstname} isBold color={Colors.mainBlue} />
+                    </View>
                 </>
             }
-        </View>
+        </TouchableOpacity>
     )
 }
 
@@ -50,5 +54,11 @@ const styles = StyleSheet.create({
         height: 1,
         backgroundColor: Colors.veryLightGrey,
         marginVertical: 12,
+    },
+    userImage: {
+        width: 24,
+        height: 24,
+        borderRadius: 100,
+        backgroundColor: Colors.darkGrey
     }
 })

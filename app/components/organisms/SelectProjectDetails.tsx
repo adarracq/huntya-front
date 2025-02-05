@@ -115,8 +115,8 @@ export default function SelectProjectDetails(props: Props) {
                     value={props.project.surfaceExt ? props.project.surfaceExt : 0}
                     onChange={props.onChangeSurfaceExt}
                     min={0}
-                    step={10}
-                    max={10000}
+                    step={1}
+                    max={100}
                 />
 
             }

@@ -32,6 +32,9 @@ export default function BottomTabNav() {
         'NewProject1Zone',
         'NewProject2Details',
         'NewProject3Descr',
+        'SeeProject',
+        'UserPublicProfile',
+        'AgentPublicProfile',
     ];
     return (
         <Tab.Navigator

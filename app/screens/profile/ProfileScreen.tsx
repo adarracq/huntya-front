@@ -69,7 +69,12 @@ export default function ProfileScreen({ navigation, route }: Props) {
         <View style={styles.container}>
             <ProfileHeader
                 user={userData}
-                onSeePublicProfile={() => console.log('onSeePublicProfile')}
+                onSeePublicProfile={() => {
+                    user.type == 'agent' ?
+                        navigation.navigate('AgentPublicProfile', { user: userData })
+                        :
+                        navigation.navigate('UserPublicProfile', { email: user.email })
+                }}
             //onSeePublicProfile={() => navigation.navigate('PublicProfile', { user: userData })}
             />
             <View style={styles.menuContainer}>
