@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { NativeStackScreenProps } from 'react-native-screens/lib/typescript/native-stack/types';
 import { ProfileNavParams } from '@/app/navigations/ProfileNav';
@@ -72,12 +72,12 @@ export default function EditProDataScreen({ navigation, route }: Props) {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 30, left: 20 }}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 30, left: 20, }}>
                 <Image source={functions.getIconSource('arrow-left')} style={{ width: 20, height: 20 }} />
             </TouchableOpacity>
-            <View style={{ gap: 24, marginTop: 20, paddingBottom: 130 }}>
-                <Title0 title={'Informations professionnelles'} isLeft />
-                <ScrollView contentContainerStyle={{ gap: 16, paddingBottom: 50 }}>
+            <View style={{ gap: 24, marginTop: 20, }}>
+                <ScrollView contentContainerStyle={{ gap: 16, paddingBottom: 100, paddingHorizontal: 20 }}>
+                    <Title0 title={'Informations professionnelles'} isLeft />
                     <View style={{ gap: 10 }} >
                         <Title2 title={'Réseau professionnel'} isLeft />
                         <InputField
@@ -185,13 +185,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'space-between',
-        padding: 20,
+        backgroundColor: Colors.white,
         paddingTop: 50,
-        backgroundColor: Colors.white
     },
     saveBtn: {
         position: 'absolute',
         bottom: 35,
         left: 20,
+        width: Dimensions.get('window').width - 40,
     }
 })

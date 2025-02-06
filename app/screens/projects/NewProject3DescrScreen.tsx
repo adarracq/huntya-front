@@ -26,7 +26,7 @@ export default function NewProject3DescrScreen({ navigation, route }: Props) {
         // first we add the zone if project is in a zone
         zoneService.getZoneFromCoords(project.coords)
             .then((zone) => {
-                project.zoneId = zone;
+                project.zoneCode = zone;
                 create1(project);
             })
             .catch((error) => {

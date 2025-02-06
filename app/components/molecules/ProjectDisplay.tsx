@@ -47,18 +47,18 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         borderColor: Colors.veryLightGrey,
         borderWidth: 1,
-        padding: 12,
         gap: 8,
+        padding: 12
     },
     horizontalDivider: {
         height: 1,
         backgroundColor: Colors.veryLightGrey,
-        marginVertical: 12,
+        marginHorizontal: -12
     },
     userImage: {
         width: 24,
         height: 24,
         borderRadius: 100,
-        backgroundColor: Colors.darkGrey
+        backgroundColor: Colors.lightGrey
     }
 })

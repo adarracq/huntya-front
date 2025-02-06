@@ -7,7 +7,7 @@ export default class Agent {
     notes: number[] | null;
     specialities: number[] | null;
     experience: number | null;
-    zonesId: number[] | null;
+    zoneCodes: string[] | null;
     verifId: string | null; // ID of the verification document
     badges: number[];
     // subscription
@@ -21,7 +21,7 @@ export default class Agent {
         this.notes = null;
         this.specialities = null;
         this.experience = null;
-        this.zonesId = [];
+        this.zoneCodes = [];
         this.verifId = null;
         this.badges = [];
         this.subscription = null;

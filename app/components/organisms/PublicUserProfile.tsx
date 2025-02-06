@@ -65,8 +65,8 @@ export default function PublicUserProfile(props: Props) {
                     </View>
                 }
             </View>
-            <Title0 title={getFirstNameAndAge()} isLeft />
-            <ScrollView contentContainerStyle={{ gap: 24, paddingBottom: 100 }}>
+            <Title0 title={getFirstNameAndAge()} isLeft style={{ paddingLeft: 20 }} />
+            <ScrollView contentContainerStyle={{ gap: 24, paddingBottom: 100, paddingHorizontal: 20 }}>
                 {
                     props.user.presentation && props.user.presentation.length > 0 &&
                     <View style={styles.presContainer}>
@@ -103,13 +103,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.white,
-        padding: 20,
         paddingTop: 70,
         gap: 24
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        paddingHorizontal: 20,
     },
     profilePicture: {
         width: 120,
@@ -137,5 +137,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 35,
         left: 20,
+        width: Dimensions.get('window').width - 40,
     }
 })

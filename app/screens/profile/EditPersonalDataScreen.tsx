@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { NativeStackScreenProps } from 'react-native-screens/lib/typescript/native-stack/types';
 import { ProfileNavParams } from '@/app/navigations/ProfileNav';
@@ -67,9 +67,9 @@ export default function EditPersonalDataScreen({ navigation, route }: Props) {
             <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 30, left: 20 }}>
                 <Image source={functions.getIconSource('arrow-left')} style={{ width: 20, height: 20 }} />
             </TouchableOpacity>
-            <View style={{ gap: 24, marginTop: 20, paddingBottom: 130 }}>
-                <Title0 title={'Informations personnelles'} isLeft />
-                <ScrollView contentContainerStyle={{ gap: 16, paddingBottom: 20 }}>
+            <View style={{ gap: 24, marginTop: 20, }}>
+                <ScrollView contentContainerStyle={{ gap: 16, paddingBottom: 100, paddingHorizontal: 20 }}>
+                    <Title0 title={'Informations personnelles'} isLeft />
                     <InputField
                         title="Prénom"
                         placeholder='Pierre'
@@ -100,6 +100,22 @@ export default function EditPersonalDataScreen({ navigation, route }: Props) {
                         onSelectItem={(item) => {
                             setGender(item.id);
                         }}
+                    />
+                    <InputField
+                        title="Présentation"
+                        placeholder='Ecrivez quelques mots pour vous présenter'
+                        value={presentation || ''}
+                        onChangeText={(text) => setPresentation(text)}
+                        isMultiline
+                        height={150}
+                    />
+                    <InputField
+                        title="Présentation"
+                        placeholder='Ecrivez quelques mots pour vous présenter'
+                        value={presentation || ''}
+                        onChangeText={(text) => setPresentation(text)}
+                        isMultiline
+                        height={150}
                     />
                     <InputField
                         title="Présentation"
@@ -161,7 +177,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'space-between',
-        padding: 20,
         paddingTop: 50,
         backgroundColor: Colors.white
     },
@@ -169,5 +184,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 35,
         left: 20,
+        width: Dimensions.get('window').width - 40,
     }
 })

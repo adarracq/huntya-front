@@ -14,7 +14,7 @@ import { zoneService } from '@/app/services/zone.service';
 type Props = {
     nbZones: number;
     selectedZones: Zone[];
-    onValidate: (selectedZonesIds: string[]) => void;
+    onValidate: (selectedZonesCodes: string[]) => void;
 }
 export default function SelectZonesScreen(props: Props) {
     // first we create an array of zones with the length of the number of zones
@@ -85,7 +85,7 @@ export default function SelectZonesScreen(props: Props) {
         <View style={styles.container}>
             <SearchAddress
                 onSelectAddress={onAddressSelected}
-            //isSearching={() => { }}
+                isSearching={() => { }}
             />
             <SelectZoneMap
                 coordSearchOrGeoloc={coordSearchOrGeolocation}
@@ -149,8 +149,8 @@ export default function SelectZonesScreen(props: Props) {
                     }}
                     onValidate={() => {
                         addToBddNewZones(agentZones.filter(zone => zone !== null) as Zone[]);
-                        const selectedZonesIds = agentZones.map(zone => zone!.code);
-                        props.onValidate(selectedZonesIds);
+                        const selectedZoneCodes = agentZones.map(zone => zone!.code);
+                        props.onValidate(selectedZoneCodes);
                     }}
                 />
             }

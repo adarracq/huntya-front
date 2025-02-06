@@ -10,7 +10,7 @@ import Colors from '@/app/constants/Colors';
 type Props = {
     onSelectAddress: (coords: Coordinates, address: any) => void;
     searchBarStyle?: ViewStyle;
-    //isSearching: (isSearching: boolean) => void;
+    isSearching: (isSearching: boolean) => void;
 }
 export default function SearchAddress(props: Props) {
 
@@ -28,7 +28,7 @@ export default function SearchAddress(props: Props) {
             const coords = await Location.geocodeAsync(data.description);
 
             props.onSelectAddress(coords[0], data);
-
+            props.isSearching(false);
             setIsFocused(false);
         }
     }
@@ -39,6 +39,7 @@ export default function SearchAddress(props: Props) {
             <View style={[styles.searchBarContainer, props.searchBarStyle]}>
                 <Pressable
                     onPress={() => {
+                        props.isSearching(true);
                         setIsFocused(true);
                     }}
                     style={styles.searchBar}
@@ -55,6 +56,7 @@ export default function SearchAddress(props: Props) {
             <View style={styles.searchContainer}>
                 <TouchableOpacity
                     onPress={() => {
+                        props.isSearching(false);
                         setIsFocused(false);
                     }}
                     style={[styles.backArrow, {

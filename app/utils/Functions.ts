@@ -125,6 +125,10 @@ function getIconSource(name: string) {
             return require('../assets/icons/network.png');
         case 'star':
             return require('../assets/icons/star.png');
+        case 'filter':
+            return require('../assets/icons/filter.png');
+        case 'map2':
+            return require('../assets/icons/map2.png');
         default:
             return require('../assets/icons/none.png');
     }

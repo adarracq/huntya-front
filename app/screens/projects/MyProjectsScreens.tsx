@@ -58,7 +58,7 @@ export default function MyProjectsScreens({ navigation, route }: Props) {
                 projects.length == 0 &&
                 <SmallText text="Vous n'avez pas encore de projet, cliquer sur le bouton + ci-dessus pour en créer un." isLeft />
             }
-            <ScrollView contentContainerStyle={{ gap: 20 }}>
+            <ScrollView contentContainerStyle={{ gap: 20, paddingBottom: 20, paddingHorizontal: 20 }}>
                 {
                     projects.map((project, index) => (
                         <ProjectDisplay
@@ -79,7 +79,6 @@ export default function MyProjectsScreens({ navigation, route }: Props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
         paddingTop: 50,
         backgroundColor: Colors.white,
         gap: 20
@@ -89,6 +88,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginTop: 20,
+        paddingHorizontal: 20
     }
 
 })

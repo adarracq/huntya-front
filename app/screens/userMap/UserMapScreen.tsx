@@ -7,7 +7,7 @@ type Props = NativeStackScreenProps<UserMapNavParams, 'HomeUserMap'>;
 export default function UserMapScreen({ navigation, route }: Props) {
     return (
         <View>
-            <Text>AgentMapScreen</Text>
+            <Text>UserMapScreen</Text>
         </View>
     )
 }

@@ -24,7 +24,7 @@ export default class Project {
     budgetMin: number | null;
     budgetMax: number | null;
     description: string;
-    zoneId: number | null;
+    zoneCode: string | null;
     address: Address | null;
     addressString: string | null;
     coords: Coordinates | null;
@@ -46,7 +46,7 @@ export default class Project {
         this.type = 0;
         this.categorie = 0;
         this.description = '';
-        this.zoneId = null;
+        this.zoneCode = null;
         this.address = null;
         this.addressString = null;
         this.coords = null;

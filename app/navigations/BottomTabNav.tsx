@@ -37,6 +37,8 @@ export default function BottomTabNav() {
         'SeeProject',
         'UserPublicProfile',
         'AgentPublicProfile',
+        'AgentSeeUserProfile',
+        'AgentSeeProject',
     ];
     return (
         <Tab.Navigator

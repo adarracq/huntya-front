@@ -43,6 +43,7 @@ export default function NewProject1ZoneScreen({ navigation, route }: Props) {
                 <Title0 title={'Quelle est votre zone de recherche ?'} isLeft />
                 <SearchAddress
                     onSelectAddress={selectAddress}
+                    isSearching={(isSearching) => console.log('isSearching', isSearching)}
                     searchBarStyle={{
                         position: 'static',
                         padding: 0
