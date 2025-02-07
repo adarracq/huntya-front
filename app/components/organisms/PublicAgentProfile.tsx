@@ -89,7 +89,7 @@ export default function PublicAgentProfile(props: Props) {
                 {props.user.agentProperties?.specialities?.map((speciality, index) => (
                     <View key={index} style={{
                         borderRadius: 100,
-                        backgroundColor: Colors.mainBlue,
+                        backgroundColor: AgentSpecialities.specialities[speciality].color,
                         alignContent: 'center',
                         justifyContent: 'center',
                         paddingHorizontal: 12,

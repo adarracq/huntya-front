@@ -2,13 +2,13 @@ import Colors from "./Colors";
 
 export default {
     specialities: [
-        { id: 0, label: 'Achat', value: 0, selected: false, },
-        { id: 1, label: 'Vente', value: 1, selected: false,},
-        { id: 2, label: 'Location', value: 2, selected: false, },
-        { id: 3, label: 'Gestion locative', value: 3, selected: false,},
-        { id: 4, label: 'Viager', value: 4, selected: false, },
-        { id: 5, label: 'Locaux commerciaux', value: 5, selected: false, },
-        { id: 6, label: 'Immobilier Neuf', value: 6, selected: false,  }
+        { id: 0, label: 'Achat', value: 0, selected: false, color: Colors.mainBlue },
+        { id: 1, label: 'Vente', value: 1, selected: false, color: Colors.lightGreen },
+        { id: 2, label: 'Location', value: 2, selected: false, color: Colors.mainRed },
+        { id: 3, label: 'Gestion locative', value: 3, selected: false, color: Colors.mainBlue },
+        { id: 4, label: 'Viager', value: 4, selected: false, color: Colors.lightGreen },
+        { id: 5, label: 'Locaux commerciaux', value: 5, selected: false, color: Colors.mainRed },
+        { id: 6, label: 'Immobilier Neuf', value: 6, selected: false,  color: Colors.mainBlue },
     ],
     badges: [
         { label: 'Expert(e) local(e)', value: 0, info: "Agent qui connaît parfaitement le marché immobilier local et ses spécificités.", color: Colors.mainBlue },
