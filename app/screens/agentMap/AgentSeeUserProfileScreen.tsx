@@ -38,9 +38,9 @@ export default function AgentSeeUserProfileScreen({ navigation, route }: Props) 
     return user && !loading ? (
         <PublicUserProfile
             user={user}
-            onSendMessage={() => console.log('sendMessage')}
+            onSendMessage={() => navigation.navigate('AMChat', { user: route.params.user, withEmail: user.email })}
             onBack={() => navigation.goBack()}
-            onProjectPress={(project) => navigation.navigate('AgentSeeProject', { project })}
+            onProjectPress={(project) => navigation.navigate('AgentSeeProject', { user: route.params.user, project })}
         />
     )
         : <LoadingScreen />

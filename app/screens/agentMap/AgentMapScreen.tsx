@@ -102,7 +102,7 @@ export default function AgentMapScreen({ navigation, route }: Props) {
     }, [user, isFocused])
 
 
-    return (
+    return userData && (
         <View style={styles.container}>
             {!isSearching && <SwitchListMap
                 isList={isList}
@@ -117,7 +117,7 @@ export default function AgentMapScreen({ navigation, route }: Props) {
                         projects={projectsInZones}
                         filters={typeFilters}
                         onChangeFilters={(_filters) => setTypeFilters(_filters)}
-                        onSeeProject={(_project) => navigation.navigate('AgentSeeProject', { project: _project })}
+                        onSeeProject={(_project) => navigation.navigate('AgentSeeProject', { user: userData, project: _project })}
                     />
                     :
                     <>
@@ -125,9 +125,9 @@ export default function AgentMapScreen({ navigation, route }: Props) {
                             projects={projectsInZones}
                             agentZones={agentZones}
                             coordSearchOrGeoloc={coordSearchOrGeolocation}
-                            onSeeProfile={(email) => navigation.navigate('AgentSeeUserProfile', { email })}
-                            onSeeProject={(project) => navigation.navigate('AgentSeeProject', { project })}
-                            onMessage={(email) => console.log('message', email)}
+                            onSeeProfile={(email) => navigation.navigate('AgentSeeUserProfile', { user: userData, email })}
+                            onSeeProject={(project) => navigation.navigate('AgentSeeProject', { user: userData, project })}
+                            onMessage={(email) => navigation.navigate('AMChat', { user: userData, withEmail: email })}
                         />
 
                         <SearchAddress

@@ -62,9 +62,9 @@ export default function SetLanguagesScreen({ navigation, route }: Props) {
                 <ProgressBar progress={4} title="Langues" width={80}
                     total={user.type === 0 ? 4 : 9}
                 />
-                <Title0 title={'Quelle(s) langue(s) parlez-vous ?'} isLeft />
+                <Title0 title={'Quelle(s) langue(s) parlez-vous ?'} isLeft style={{ padding: 20 }} />
             </View>
-            <ScrollView contentContainerStyle={{ gap: 16, paddingVertical: 30 }}>
+            <ScrollView contentContainerStyle={{ gap: 16, paddingVertical: 30, paddingHorizontal: 20 }}>
                 {
                     languages.map((language, index) => (
                         <CheckBox
@@ -77,10 +77,12 @@ export default function SetLanguagesScreen({ navigation, route }: Props) {
                     ))
                 }
             </ScrollView>
-            <Button title="Suivant"
-                backgroundColor={Colors.mainBlue}
-                textColor={Colors.white}
-                onPress={next} />
+            <View style={{ padding: 20, paddingTop: 0 }} >
+                <Button title="Suivant"
+                    backgroundColor={Colors.mainBlue}
+                    textColor={Colors.white}
+                    onPress={next} />
+            </View>
 
             {
                 loading && <LoadingScreen />
@@ -93,7 +95,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'space-between',
-        padding: 20,
         paddingTop: 50,
         backgroundColor: Colors.white
     },

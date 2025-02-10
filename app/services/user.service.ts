@@ -6,6 +6,7 @@ export const userService = {
     loginOrSignup,
     verifyEmailCode,
     getByEmail,
+    getById,
     getAgents,
     update
 };
@@ -20,6 +21,10 @@ function verifyEmailCode(params: any) {
 
 function getByEmail(email: string) {
     return fetchWrapper.get(baseUrl + '/' + email);
+}
+
+function getById(id: string) {
+    return fetchWrapper.get(`${baseUrl}/id/${id}`);
 }
 
 function getAgents() {

@@ -1,4 +1,3 @@
-import Address from "./Address";
 import Coordinates from "./Coordinates";
 
 export default class Project {
@@ -25,11 +24,9 @@ export default class Project {
     budgetMax: number | null;
     description: string;
     zoneCode: string | null;
-    address: Address | null;
     addressString: string | null;
     coords: Coordinates | null;
     status: number; // 0: en attente, 1: en cours, 2: termin
-    isPublic: boolean;
 
     constructor(
         user_id: string,
@@ -47,11 +44,9 @@ export default class Project {
         this.categorie = 0;
         this.description = '';
         this.zoneCode = null;
-        this.address = null;
         this.addressString = null;
         this.coords = null;
         this.status = 0;
-        this.isPublic = true;
         this.nbRooms = 0;
         this.nbBedrooms = 0;
         this.nbBathrooms = 0;

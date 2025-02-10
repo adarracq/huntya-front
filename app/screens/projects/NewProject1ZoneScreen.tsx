@@ -8,12 +8,10 @@ import ProgressBar from '@/app/components/molecules/ProgressBar';
 import Title0 from '@/app/components/atoms/Title0';
 import { functions } from '@/app/utils/Functions';
 import Button from '@/app/components/atoms/Button';
-import Address from '@/app/models/Address';
 import SearchAddress from '@/app/components/organisms/SearchAddress';
 import Coordinates from '@/app/models/Coordinates';
 import BodyText from '@/app/components/atoms/BodyText';
 import Title2 from '@/app/components/atoms/Title2';
-import { zoneService } from '@/app/services/zone.service';
 
 type Props = NativeStackScreenProps<ProfileNavParams, 'NewProject1Zone'>;
 export default function NewProject1ZoneScreen({ navigation, route }: Props) {

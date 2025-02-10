@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import ActionSheet, { ActionSheetRef } from 'react-native-actions-sheet';
 import Colors from '@/app/constants/Colors';
@@ -19,13 +19,15 @@ import Event from '@/app/models/Event';
 import { functions } from '@/app/utils/Functions';
 import Title2 from '@/app/components/atoms/Title2';
 import UserPublic from '@/app/models/UserPublic';
+import BodyText from '@/app/components/atoms/BodyText';
 
 type Props = {
     open: boolean;
     friends: UserPublic[];
     user: User;
     edit?: Event;
-    onValidate: () => void;
+    withUser?: User;
+    onValidate: (event: any) => void;
 }
 export default function NewEventDrawer(props: Props) {
     const actionSheetRef = useRef<ActionSheetRef>(null);
@@ -58,7 +60,7 @@ export default function NewEventDrawer(props: Props) {
                 lastname: props.user.lastname,
                 imageUrl: props.user.imageUrl
             },
-            guests: selectedGuests,
+            guests: props.withUser ? [props.withUser] : selectedGuests,
             hour,
             status: 'pending'
         };
@@ -71,7 +73,7 @@ export default function NewEventDrawer(props: Props) {
                 });
                 actionSheetRef.current?.hide();
                 setLoading(false);
-                props.onValidate();
+                props.onValidate(event);
                 // TODO send notification to guests
             })
             .catch((error) => {
@@ -116,7 +118,7 @@ export default function NewEventDrawer(props: Props) {
                 });
                 actionSheetRef.current?.hide();
                 setLoading(false);
-                props.onValidate();
+                props.onValidate(event);
                 // TODO send notification to guests
             })
             .catch((error) => {
@@ -143,7 +145,7 @@ export default function NewEventDrawer(props: Props) {
                 });
                 actionSheetRef.current?.hide();
                 setLoading(false);
-                props.onValidate();
+                props.onValidate(event);
                 // TODO send notification to guests
             })
             .catch((error) => {
@@ -169,6 +171,7 @@ export default function NewEventDrawer(props: Props) {
             setHour(props.edit.hour);
             setSelectedGuests(props.edit.guests);
         }
+
     }, [props.edit])
 
     // open the action sheet 
@@ -193,24 +196,30 @@ export default function NewEventDrawer(props: Props) {
                 } isLeft />
 
                 <View style={{ gap: 16 }}>
-                    <AddGuestDrawer
-                        friends={props.friends}
-                        onSelectFriend={(friend) => {
-                            let newGuests = selectedGuests;
-                            if (newGuests.find(g => g.email === friend.email)) {
-                                newGuests = newGuests.filter(g => g.email !== friend.email);
-                            } else {
-                                newGuests.push(friend);
-                            }
-                            setSelectedGuests(newGuests);
-                            // we add selected value to friend array
-                            props.friends.map(f => {
-                                if (f.email === friend.email) {
-                                    f.selected = !f.selected;
+                    {props.withUser ?
+                        <GuestDisplay
+                            guest={props.withUser}
+                            onRemove={() => console.log('remove')}
+                        />
+                        :
+                        <AddGuestDrawer
+                            friends={props.friends}
+                            onSelectFriend={(friend) => {
+                                let newGuests = selectedGuests;
+                                if (newGuests.find(g => g.email === friend.email)) {
+                                    newGuests = newGuests.filter(g => g.email !== friend.email);
+                                } else {
+                                    newGuests.push(friend);
                                 }
-                            })
-                        }}
-                    />
+                                setSelectedGuests(newGuests);
+                                // we add selected value to friend array
+                                props.friends.map(f => {
+                                    if (f.email === friend.email) {
+                                        f.selected = !f.selected;
+                                    }
+                                })
+                            }}
+                        />}
                     {
                         selectedGuests.map((guest, index) => (
                             <GuestDisplay

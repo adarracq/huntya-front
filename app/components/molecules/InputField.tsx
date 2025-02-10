@@ -20,6 +20,7 @@ type InputFieldProps = {
     height?: number;
     style?: ViewStyle;
     isCreditCard?: boolean;
+    noTitle?: boolean;
 }
 
 export default function InputField(props: InputFieldProps) {
@@ -55,11 +56,13 @@ export default function InputField(props: InputFieldProps) {
                     backgroundColor: Colors.white,
                 }, props.style]}
             >
-                <SmallText
-                    text={props.title}
-                    color={isFocused ? Colors.mainBlue : Colors.darkGrey}
-                    isLeft
-                />
+                {!props.noTitle &&
+                    <SmallText
+                        text={props.title}
+                        color={isFocused ? Colors.mainBlue : Colors.darkGrey}
+                        isLeft
+                    />
+                }
                 <TextInput
                     style={{
                         fontFamily: props.value ? 'title-bold' : 'title',

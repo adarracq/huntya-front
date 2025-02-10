@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import Colors from '@/app/constants/Colors';
 import Title0 from '@/app/components/atoms/Title0';
@@ -23,7 +23,6 @@ export default function AccountCreatedScreen({ navigation, route }: Props) {
                 type: 'user'
             };
             setUser(_user);
-            AsyncStorageUser.setUser(_user);
 
         } else if (route.params.type === 1) {
             navigation.navigate('SelectZoneOnBoarding', { email: route.params.email })
@@ -34,9 +33,27 @@ export default function AccountCreatedScreen({ navigation, route }: Props) {
                 type: 'agent'
             };
             setUser(_user);
-            AsyncStorageUser.setUser(_user);
         }
     }
+
+    // save user in the async storage
+    useEffect(() => {
+        if (route.params.type === 0) {
+            let _user = {
+                email: route.params.email,
+                type: 'user'
+            };
+            AsyncStorageUser.setUser(_user);
+
+        } else if (route.params.type === 2) {
+            let _user = {
+                email: route.params.email,
+                type: 'agent'
+            };
+            AsyncStorageUser.setUser(_user);
+        }
+    }, [])
+
     return (
         <LinearGradient
             colors={[Colors.mainBlueDark, Colors.mainBlue, Colors.mainBlueLight]}

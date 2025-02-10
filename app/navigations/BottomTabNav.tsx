@@ -9,6 +9,7 @@ import ProfileNav from './ProfileNav';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import AgentMapNav from './AgentMapNav';
 import UserMapNav from './UserMapNav';
+import MessagesNav from './MessagesNav';
 
 export type BottomNavParams = {
     Project: undefined;
@@ -40,6 +41,11 @@ export default function BottomTabNav() {
         'AgentSeeUserProfile',
         'AgentSeeProject',
         'UserSeeAgentProfile',
+        'EditZone',
+        'AMChat',
+        'Chat',
+        'UserProfile',
+        'AgentProfile',
     ];
     return (
         <Tab.Navigator
@@ -86,8 +92,7 @@ export default function BottomTabNav() {
             />
             <Tab.Screen
                 name="Messages"
-                //component={MessagesNav}
-                component={CalendarNav}
+                component={MessagesNav}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         TabBarElement({

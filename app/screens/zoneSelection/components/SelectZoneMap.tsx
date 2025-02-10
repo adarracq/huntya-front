@@ -110,6 +110,7 @@ export default function SelectZoneMap(props: Props) {
                     resp[0].region.nom,
                     0, //nbContacts
                     0, //nbProjets
+                    0, //nbAgents
                     true, //isNew
                     false //isSelected
                 );

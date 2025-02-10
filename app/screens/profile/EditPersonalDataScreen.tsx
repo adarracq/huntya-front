@@ -109,22 +109,6 @@ export default function EditPersonalDataScreen({ navigation, route }: Props) {
                         isMultiline
                         height={150}
                     />
-                    <InputField
-                        title="Présentation"
-                        placeholder='Ecrivez quelques mots pour vous présenter'
-                        value={presentation || ''}
-                        onChangeText={(text) => setPresentation(text)}
-                        isMultiline
-                        height={150}
-                    />
-                    <InputField
-                        title="Présentation"
-                        placeholder='Ecrivez quelques mots pour vous présenter'
-                        value={presentation || ''}
-                        onChangeText={(text) => setPresentation(text)}
-                        isMultiline
-                        height={150}
-                    />
                     <DropDown
                         title="Langues"
                         placeholder="Selectionnez les langues parlées"

@@ -5,6 +5,7 @@ const baseUrl = process.env.EXPO_PUBLIC_DEV_API_URL + '/api/zone';
 export const zoneService = {
     getAll,
     getMany,
+    addToZones,
     create,
     createMany,
     getZoneFromCoords,
@@ -24,6 +25,10 @@ function create(params: any) {
 
 function createMany(params: any) {
     return fetchWrapper.post(baseUrl + '/many', params);
+}
+
+function addToZones(params:any) {
+    return fetchWrapper.put(baseUrl + '/add', params);
 }
 
 function getZoneFromCoords(coords: any) {

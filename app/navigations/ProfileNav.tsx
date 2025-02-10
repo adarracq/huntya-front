@@ -14,6 +14,7 @@ import Project from '../models/Project';
 import SeeProjectScreen from '../screens/projects/SeeProjectScreen';
 import UserPublicProfileScreen from '../screens/projects/UserPublicProfileScreen';
 import AgentPublicProfileScreen from '../screens/projects/AgentPublicProfileScreen';
+import EditZoneScreen from '../screens/profile/EditZoneMapScreen';
 
 export type ProfileNavParams = {
     HomeProfile: undefined;
@@ -21,6 +22,7 @@ export type ProfileNavParams = {
     EditProData: { user: User }
     EditPlan: { user: User }
     MyProjects: { user: User }
+    EditZone: { user: User }
     NewProject0Type: { user: User }
     NewProject1Zone: { project: Project }
     NewProject2Details: { project: Project }
@@ -41,6 +43,7 @@ export default function ProfileNav() {
             <Stack.Screen name="EditProData" component={EditProDataScreen} options={{ headerShown: false }} />
             <Stack.Screen name="EditPlan" component={EditPlanScreen} options={{ headerShown: false }} />
             <Stack.Screen name="MyProjects" component={MyProjectsScreens} options={{ headerShown: false }} />
+            <Stack.Screen name="EditZone" component={EditZoneScreen} options={{ headerShown: false }} />
             <Stack.Screen name="NewProject0Type" component={NewProject0TypeScreen} options={{ headerShown: false }} />
             <Stack.Screen name="NewProject1Zone" component={NewProject1ZoneScreen} options={{ headerShown: false }} />
             <Stack.Screen name="NewProject2Details" component={NewProject2DetailsScreen} options={{ headerShown: false }} />

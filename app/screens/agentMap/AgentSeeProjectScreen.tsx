@@ -9,13 +9,14 @@ type Props = NativeStackScreenProps<AgentMapNavParams, 'AgentSeeProject'>;
 export default function AgentSeeProjectScreen({ navigation, route }: Props) {
 
     const project = route.params.project;
+    const userData = route.params.user;
 
     return (
         <ProjectPresentation
             project={project}
             onBack={() => navigation.goBack()}
-            onSendMessage={() => console.log('sendMessage')}
-            onSeeProfile={() => navigation.navigate('AgentSeeUserProfile', { email: project.user_email })}
+            onSendMessage={() => navigation.navigate('AMChat', { user: userData, withEmail: project.user_email })}
+            onSeeProfile={() => navigation.navigate('AgentSeeUserProfile', { user: userData, email: project.user_email })}
         />
     )
 }

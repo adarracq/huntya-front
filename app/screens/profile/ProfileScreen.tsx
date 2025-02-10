@@ -75,7 +75,6 @@ export default function ProfileScreen({ navigation, route }: Props) {
                         :
                         navigation.navigate('UserPublicProfile', { email: user.email })
                 }}
-            //onSeePublicProfile={() => navigation.navigate('PublicProfile', { user: userData })}
             />
             <View style={styles.menuContainer}>
                 <MenuItem
@@ -94,7 +93,7 @@ export default function ProfileScreen({ navigation, route }: Props) {
                             />
                             <View style={styles.divider} />
                             <MenuItem
-                                onPress={() => console.log('onPress')}
+                                onPress={() => navigation.navigate('EditZone', { user: userData })}
                                 text={'Mes zones'}
                                 icon={'marker-home'}
                             />

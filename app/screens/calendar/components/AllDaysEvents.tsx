@@ -38,7 +38,7 @@ export default function AllDaysEvents(props: Props) {
 
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             {
                 daysEvents.reverse().map((dayEvents, index) => (
                     <DayEvents
@@ -59,5 +59,6 @@ const styles = StyleSheet.create({
     container: {
         display: 'flex',
         backgroundColor: Colors.white,
+        paddingBottom: 100,
     },
 })

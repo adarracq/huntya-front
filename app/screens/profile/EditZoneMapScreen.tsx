@@ -8,36 +8,22 @@ import { userService } from '@/app/services/user.service';
 import { showMessage } from 'react-native-flash-message';
 import User from '@/app/models/User';
 import { zoneService } from '@/app/services/zone.service';
+import { ProfileNavParams } from '@/app/navigations/ProfileNav';
+import Zone from '@/app/models/Zone';
 
-type Props = NativeStackScreenProps<NavParams, 'SelectZoneMap'>;
-export default function SelectZoneMapScreen({ navigation, route }: Props) {
+type Props = NativeStackScreenProps<ProfileNavParams, 'EditZone'>;
+export default function EditZoneScreen({ navigation, route }: Props) {
 
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState<User | null>(null);
-
-    const getUser = async () => {
-        userService.getByEmail(route.params.email)
-            .then((response) => {
-                setUser(response);
-                setLoading(false);
-            })
-            .catch((error) => {
-                showMessage({
-                    message: "Erreur",
-                    description: "Une erreur s'est produite",
-                    type: "danger",
-                });
-                console.log(error);
-            });
-    }
+    const [zones, setZones] = useState<Zone[]>([]);
 
 
     const onValidate = (selectedZoneCodes: string[]) => {
         // update user with selected zones
         const updatedUser = {
             user: {
-                email: user!.email,
-                agentProperties: { ...user!.agentProperties, zoneCodes: selectedZoneCodes }
+                email: route.params.user.email,
+                agentProperties: { ...route.params.user.agentProperties, zoneCodes: selectedZoneCodes }
             }
         };
 
@@ -47,7 +33,12 @@ export default function SelectZoneMapScreen({ navigation, route }: Props) {
                     zones: selectedZoneCodes,
                     type: 'agent',
                 }).then((response) => {
-                    navigation.navigate('AccountCreated', { type: 2, email: user!.email });
+                    showMessage({
+                        message: "Succès",
+                        description: "Vos zones ont été mises à jour",
+                        type: "success",
+                    });
+                    navigation.goBack();
                 }).catch((error) => {
                     showMessage({
                         message: "Erreur",
@@ -67,22 +58,36 @@ export default function SelectZoneMapScreen({ navigation, route }: Props) {
             });
     }
 
+    function getZones() {
+        zoneService.getMany(route.params.user.agentProperties?.zoneCodes || [])
+            .then((response) => {
+                setZones(response);
+                setLoading(false);
+            })
+            .catch((error) => {
+                showMessage({
+                    message: "Erreur",
+                    description: "Une erreur s'est produite",
+                    type: "danger",
+                });
+                console.log(error);
+            });
+    }
+
     useEffect(() => {
-        getUser();
+        getZones();
     }, []);
+
 
     return (
         <View style={{ flex: 1 }}>
-            {
-                loading ?
-                    <LoadingScreen />
-                    : user &&
-                    <SelectZonesScreen
-                        nbZones={user!.agentProperties?.maxZones || 0}
-                        selectedZones={[]} // empty because we don't have the selected zones yet
-                        onValidate={onValidate}
-                    />
-            }
+
+            <SelectZonesScreen
+                nbZones={route.params.user.agentProperties?.maxZones || 0}
+                selectedZones={zones}
+                onValidate={onValidate}
+            />
+
         </View>
     )
 }

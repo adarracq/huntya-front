@@ -1,5 +1,4 @@
 import { Alert } from "react-native";
-import Address from "../models/Address";
 
 export const functions = {
     getIconSource,
@@ -7,10 +6,11 @@ export const functions = {
     setContour,
     separateThousands,
     dateToString,
+    dateToString2,
     dateToStringWithDayOfWeek,
     getAgeFromBirthdate,
-    getStringAddress,
     getStringDateDifference,
+    getStringDateDifference2,
 }
 
 function getIconSource(name: string) {
@@ -129,6 +129,10 @@ function getIconSource(name: string) {
             return require('../assets/icons/filter.png');
         case 'map2':
             return require('../assets/icons/map2.png');
+        case 'dots':
+            return require('../assets/icons/dots.png');
+        case 'send':
+            return require('../assets/icons/send.png');
         default:
             return require('../assets/icons/none.png');
     }
@@ -176,6 +180,16 @@ function dateToString(date: Date) {
     return `${day}/${month}/${_date.getFullYear()}`;
 }
 
+// return JJ/MM/AAAA à hh:mm
+function dateToString2(date: Date) {
+    const _date = new Date(date);
+    const day = _date.getDate().toString().padStart(2, '0');
+    const month = (_date.getMonth() + 1).toString().padStart(2, '0');
+    const hour = _date.getHours().toString().padStart(2, '0');
+    const minute = _date.getMinutes().toString().padStart(2, '0');
+    return `${day}/${month}/${_date.getFullYear()} à ${hour}:${minute}`;
+}
+
 function dateToStringWithDayOfWeek(date: Date) {
     const _date = new Date(date);
     const day = _date.getDate().toString().padStart(2, '0');
@@ -197,24 +211,6 @@ function getAgeFromBirthdate(date: Date) {
     }
 
     return age;
-}
-
-function getStringAddress(address: Address | null): string {
-    if (!address) return 'Adresse non renseignée';
-    let res = '';
-    if (address.streetNumber) {
-        res += address.streetNumber + ' ';
-    }
-    if (address.street) {
-        res += address.street + ', ';
-    }
-    if (address.postalCode) {
-        res += address.postalCode + ' ';
-    }
-    if (address.city) {
-        res += address.city;
-    }
-    return res;
 }
 
 // return Il y a ... jours ou heures from YYYY-MM-DDTHH:MM:SS.mmmZ
@@ -247,4 +243,34 @@ function getStringDateDifference(date: Date): string {
 
     return `Il y a ${diffDays} jours`;
 }
+
+// return Il y a ... jours ou heures from YYYY-MM-DDTHH:MM:SS.mmmZ
+function getStringDateDifference2(date: Date): string {
+    // Convertir les arguments en objets Date si nécessaire
+    const now = new Date();
+    if (typeof date === 'string' || typeof date === 'number') {
+        date = new Date(date);
+    }
+
+    // Vérifiez que les dates sont valides
+    if (!(date instanceof Date) || isNaN(date.getTime())) {
+        throw new Error('date is not a valid date');
+    }
+
+    const diffTime = Math.abs(now.getTime() - date.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) - 1;
+
+    // Si la différence est de moins de 1 jour on affiche l'heure
+    if (diffDays < 1) {
+        let hour = date.toLocaleTimeString().substring(0, 5);
+        // si fini par : on enlève
+        if(hour.endsWith(':')) {
+            hour = hour.substring(0, 4);
+        }
+        return hour;
+    }
+
+    return `Il y a ${diffDays}j`;
+}
+
 
