@@ -52,7 +52,7 @@ export default function PublicUserProfile(props: Props) {
                 <Image source={functions.getIconSource('arrow-left')} style={{ width: 20, height: 20 }} />
             </TouchableOpacity>
             <View style={styles.header}>
-                <Image source={{ uri: props.user.imageUrl || '' }} style={styles.profilePicture} />
+                <Image source={{ uri: (process.env.EXPO_PUBLIC_DEV_API_URL || 'https://default-url.com') + props.user.imageUrl }} style={styles.profilePicture} />
                 {props.user.languages &&
                     <View style={styles.languagesContainer}>
                         <BodyText text='LANGUES' />

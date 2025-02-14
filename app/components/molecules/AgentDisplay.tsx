@@ -40,7 +40,7 @@ export default function AgentDisplay(props: Props) {
 
             <View style={styles.horizontalDivider} />
             <TouchableOpacity style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }} onPress={props.onPress}>
-                <Image source={{ uri: props.agent.imageUrl ?? '' }} style={styles.userImage} />
+                <Image source={{ uri: (process.env.EXPO_PUBLIC_DEV_API_URL || 'https://default-url.com') + props.agent.imageUrl }} style={styles.userImage} />
 
                 <BodyText text={props.agent.firstname || ''} isBold color={Colors.mainBlue} />
             </TouchableOpacity>

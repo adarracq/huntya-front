@@ -25,7 +25,7 @@ export default function ConversationHeading(props: Props) {
         >
             <Image
                 source={{
-                    uri: props.picture
+                    uri: (process.env.EXPO_PUBLIC_DEV_API_URL || 'https://default-url.com') + props.picture
                 }}
                 style={styles.picture} />
             <View>
@@ -66,8 +66,6 @@ const styles = StyleSheet.create({
         width: 48,
         height: 48,
         borderRadius: 24,
-        borderWidth: 1,
-        borderColor: Colors.mainBlue,
         objectFit: 'cover',
     },
     date: {

@@ -49,7 +49,7 @@ export default function DayEvents(props: Props) {
                                     if (guest.email != user.email) {
                                         return (
                                             <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }} key={index}>
-                                                <Image source={{ uri: guest.imageUrl ?? '' }} style={styles.image} />
+                                                <Image source={{ uri: (process.env.EXPO_PUBLIC_DEV_API_URL || 'https://default-url.com') + guest.imageUrl }} style={styles.image} />
 
                                                 <View style={{ alignItems: 'flex-start' }}>
                                                     <BodyText text={guest.firstname ?? ''} isBold />

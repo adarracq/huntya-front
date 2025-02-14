@@ -7,14 +7,17 @@ import BodyText from '@/app/components/atoms/BodyText';
 import * as ImagePicker from 'expo-image-picker';
 import Title0 from '@/app/components/atoms/Title0';
 import { userService } from '@/app/services/user.service';
+import mime from "mime";
 
 type Props = {
     user: User;
     onSeePublicProfile: () => void;
+    onChangePicture: () => void;
 }
 export default function ProfileHeader(props: Props) {
 
     const [image, setImage] = useState<string | null>(null);
+    const [Type, setType] = React.useState('')
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -28,16 +31,18 @@ export default function ProfileHeader(props: Props) {
         if (!result.canceled) {
             setImage(result.assets[0].uri);
 
-            let uri = result.assets[0].uri;
-            const formData = new FormData();
-            const response = await fetch(uri);
-            const blob = await response.blob();
-            formData.append('image', blob);
+            const newImageUri = "file:///" + result.assets[0].uri.split("file:/").join("");
+            const formData3 = new FormData();
+            formData3.append('image', {
+                uri: newImageUri,
+                type: mime.getType(newImageUri),
+                name: newImageUri.split("/").pop()
+            });
 
-
-            await userService.uploadPicture(props.user.email, formData)
+            await userService.uploadPicture(props.user.email, formData3)
                 .then(() => {
                     console.log('Image updated');
+                    props.onChangePicture();
                 })
                 .catch((error) => {
                     console.log(error);
@@ -61,9 +66,11 @@ export default function ProfileHeader(props: Props) {
         <View style={styles.container}>
             <Image
                 style={styles.picture}
-                source={{ uri: props.user.imageUrl ?? '' }}
+                source={{ uri: (process.env.EXPO_PUBLIC_DEV_API_URL || 'https://default-url.com') + props.user.imageUrl }}
             />
-            <TouchableOpacity onPress={pickImage}
+            <TouchableOpacity
+                //onPress={pickImage}
+                onPress={pickImage}
                 style={styles.editBtn}>
 
                 <Image

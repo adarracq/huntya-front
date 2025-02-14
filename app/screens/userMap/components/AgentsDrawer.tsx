@@ -48,48 +48,8 @@ export default function AgentsDrawer(props: Props) {
                 </View>
                 <ScrollView contentContainerStyle={{ gap: 12, paddingHorizontal: 20, paddingBottom: 20 }}>
                     {
-                        props.zone.agents.map((agent) => {
-                            return <AgentDisplay agent={agent} onPress={() => props.onSeeProfile(agent.email)} />
-                        })
-                    }
-                    {
-                        props.zone.agents.map((agent) => {
-                            return <AgentDisplay agent={agent} onPress={() => props.onSeeProfile(agent.email)} />
-                        })
-                    }
-                    {
-                        props.zone.agents.map((agent) => {
-                            return <AgentDisplay agent={agent} onPress={() => props.onSeeProfile(agent.email)} />
-                        })
-                    }
-                    {
-                        props.zone.agents.map((agent) => {
-                            return <AgentDisplay agent={agent} onPress={() => props.onSeeProfile(agent.email)} />
-                        })
-                    }
-                    {
-                        props.zone.agents.map((agent) => {
-                            return <AgentDisplay agent={agent} onPress={() => props.onSeeProfile(agent.email)} />
-                        })
-                    }
-                    {
-                        props.zone.agents.map((agent) => {
-                            return <AgentDisplay agent={agent} onPress={() => props.onSeeProfile(agent.email)} />
-                        })
-                    }
-                    {
-                        props.zone.agents.map((agent) => {
-                            return <AgentDisplay agent={agent} onPress={() => props.onSeeProfile(agent.email)} />
-                        })
-                    }
-                    {
-                        props.zone.agents.map((agent) => {
-                            return <AgentDisplay agent={agent} onPress={() => props.onSeeProfile(agent.email)} />
-                        })
-                    }
-                    {
-                        props.zone.agents.map((agent) => {
-                            return <AgentDisplay agent={agent} onPress={() => props.onSeeProfile(agent.email)} />
+                        props.zone.agents.map((agent, index) => {
+                            return <AgentDisplay agent={agent} key={index} onPress={() => props.onSeeProfile(agent.email)} />
                         })
                     }
                 </ScrollView>

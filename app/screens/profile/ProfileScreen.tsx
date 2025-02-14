@@ -75,6 +75,7 @@ export default function ProfileScreen({ navigation, route }: Props) {
                         :
                         navigation.navigate('UserPublicProfile', { email: user.email })
                 }}
+                onChangePicture={() => getUserData()}
             />
             <View style={styles.menuContainer}>
                 <MenuItem

@@ -66,7 +66,7 @@ export default function PublicAgentProfile(props: Props) {
             </TouchableOpacity>
             <View style={styles.header}>
                 <View>
-                    <Image source={{ uri: props.user.imageUrl || '' }} style={styles.profilePicture} />
+                    <Image source={{ uri: (process.env.EXPO_PUBLIC_DEV_API_URL || 'https://default-url.com') + props.user.imageUrl }} style={styles.profilePicture} />
                     <View style={styles.noteContainer}>
                         <Image source={functions.getIconSource('star')} style={{ width: 20, height: 20, tintColor: Colors.mainBlue }} />
                         <Title2 title={'4.5/5'} isLeft color={Colors.mainBlue} />

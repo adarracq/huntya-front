@@ -11,7 +11,7 @@ type Props = {
 export default function UserSeeprofileBtn(props: Props) {
     return (
         <View style={{ flexDirection: 'row', gap: 12 }}>
-            <Image source={{ uri: props.imageUrl ?? '' }} style={{ width: 40, height: 40, borderRadius: 100, backgroundColor: Colors.lightGrey }} />
+            <Image source={{ uri: (process.env.EXPO_PUBLIC_DEV_API_URL || 'https://default-url.com') + props.imageUrl }} style={{ width: 40, height: 40, borderRadius: 100, backgroundColor: Colors.lightGrey }} />
             <View>
                 <BodyText text={props.firstname} isBold />
                 <TouchableOpacity onPress={props.onPress}>

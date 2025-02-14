@@ -41,18 +41,18 @@ function put(url: string, body: any) {
 }
 
 
-function putImage(url: string, formData: any) {
-
+function putImage(url:string, formData:any) {
     const requestOptions = {
-        method: "POST",
-        headers: {
-            'Content-Type': "multipart/form-data"
-        },
+        method: "PUT",
         body: formData,
-        credential: 'include'
+        headers: {
+            "Accept": "multipart/form-data",
+        },
+        credentials: "include",
     };
-    return fetch(url, requestOptions).then(handleResponse);
+    return fetch(url, requestOptions).then(handleResponse).catch(err => console.log(err));
 }
+
 
 
 // prefixed with underscored because delete is a reserved word in javascript

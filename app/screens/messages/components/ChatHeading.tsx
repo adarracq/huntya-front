@@ -64,7 +64,7 @@ export default function ChatHeading(props: Props) {
                     />
                 </TouchableOpacity>
                 <Image
-                    source={{ uri: props.user.imageUrl ? props.user.imageUrl : 'https://picsum.photos/200/300' }}
+                    source={{ uri: (process.env.EXPO_PUBLIC_DEV_API_URL || 'https://default-url.com') + props.user.imageUrl }}
                     style={{ width: 48, height: 48, borderRadius: 25 }}
                 />
                 <TouchableOpacity

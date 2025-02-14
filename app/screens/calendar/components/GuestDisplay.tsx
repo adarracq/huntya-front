@@ -13,7 +13,7 @@ export default function GuestDisplay(props: Props) {
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
-                <Image source={{ uri: props.guest.imageUrl ?? '' }} style={styles.image} />
+                <Image source={{ uri: (process.env.EXPO_PUBLIC_DEV_API_URL || 'https://default-url.com') + props.guest.imageUrl }} style={styles.image} />
 
                 <View style={{ alignItems: 'flex-start' }}>
                     <BodyText text={props.guest.firstname ?? ''} isBold />

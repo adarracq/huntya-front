@@ -32,7 +32,7 @@ export default function ProjectDisplay(props: Props) {
                 <>
                     <View style={styles.horizontalDivider} />
                     <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
-                        <Image source={{ uri: props.project.user_imageUrl ?? '' }} style={styles.userImage} />
+                        <Image source={{ uri: (process.env.EXPO_PUBLIC_DEV_API_URL || 'https://default-url.com') + props.project.user_imageUrl }} style={styles.userImage} />
 
                         <BodyText text={props.project.user_firstname} isBold color={Colors.mainBlue} />
                     </View>
