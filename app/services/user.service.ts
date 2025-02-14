@@ -8,7 +8,8 @@ export const userService = {
     getByEmail,
     getById,
     getAgents,
-    update
+    update,
+    uploadPicture
 };
 
 function loginOrSignup(params: any) {
@@ -33,4 +34,9 @@ function getAgents() {
 
 function update(params: any) {
     return fetchWrapper.put(baseUrl + '/', params);
+}
+
+function uploadPicture(email: string, formData: any) {
+    console.log(`${baseUrl}/picture/${email}`);
+    return fetchWrapper.putImage(`${baseUrl}/picture/${email}`, formData);
 }

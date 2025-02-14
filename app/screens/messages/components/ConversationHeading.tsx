@@ -12,6 +12,7 @@ type Props = {
     lastMessage: string,
     lastMessageDate: string,
     isRead: boolean,
+    nbUnreadMessages: number,
     onPress: () => void
 }
 
@@ -42,7 +43,7 @@ export default function ConversationHeading(props: Props) {
             {
                 !props.isRead &&
                 <View style={styles.date}>
-                    <Title2 title="1" color={Colors.white} />
+                    <Title2 title={props.nbUnreadMessages.toString()} color={Colors.white} />
                 </View>
             }
 

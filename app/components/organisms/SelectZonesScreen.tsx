@@ -1,5 +1,5 @@
 import { View, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Zone from '@/app/models/Zone';
 import FloatingBottomArea from '../molecules/FloatingBottomArea';
 import DeletableField from '../molecules/DeletableField';
@@ -17,9 +17,8 @@ type Props = {
     onValidate: (selectedZonesCodes: string[]) => void;
 }
 export default function SelectZonesScreen(props: Props) {
-    // first we create an array of zones with the length of the number of zones
-    // then we fill it with the selected zones and null for the others
-    const [agentZones, setAgentZones] = useState<(Zone | null)[]>(Array.from({ length: props.nbZones }, (_, index) => props.selectedZones[index] || null));
+
+    const [agentZones, setAgentZones] = useState<(Zone | null)[]>(new Array(props.nbZones).fill(null));
     const [loading, setLoading] = useState(false);
     const [coordSearchOrGeolocation, setCoordSearchOrGeolocation] = useState<Coordinates | null>(null);
     const [showValidateDrawer, setShowValidateDrawer] = useState(false);
@@ -80,6 +79,17 @@ export default function SelectZonesScreen(props: Props) {
         //add();
     }, []);
     */
+
+
+    // when the selected zones change we update the agentZones array
+    useEffect(() => {
+        const zones = new Array(props.nbZones).fill(null);
+        props.selectedZones.forEach(zone => {
+            const index = zones.findIndex(z => z === null);
+            zones[index] = zone;
+        });
+        setAgentZones(zones);
+    }, [props.selectedZones]);
 
     return (
         <View style={styles.container}>

@@ -8,6 +8,7 @@ export default class Agent {
     specialities: number[] | null;
     experience: number | null;
     zoneCodes: string[] | null;
+    lastZoneUpdateDate: Date | null;
     verifId: string | null; // ID of the verification document
     badges: number[];
     // subscription
@@ -22,6 +23,7 @@ export default class Agent {
         this.specialities = null;
         this.experience = null;
         this.zoneCodes = [];
+        this.lastZoneUpdateDate = null;
         this.verifId = null;
         this.badges = [];
         this.subscription = null;

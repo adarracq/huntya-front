@@ -46,8 +46,7 @@ function putImage(url: string, formData: any) {
     const requestOptions = {
         method: "POST",
         headers: {
-            Accept: "application/json",
-            "Content-Type": "multipart/form-data",
+            'Content-Type': "multipart/form-data"
         },
         body: formData,
         credential: 'include'

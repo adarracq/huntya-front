@@ -7,6 +7,7 @@ export const convService = {
     getUserConvs,
     readConv,
     sendMessage,
+    report,
 };
 
 function getConv(senderId: string, receiverId: string) {
@@ -23,4 +24,8 @@ function readConv(convId: string) {
 
 function sendMessage(params:any) {
     return fetchWrapper.post(`${baseUrl}/message`, params);
+}
+
+function report(params:any) {
+    return fetchWrapper.put(`${baseUrl}/report`, params);
 }

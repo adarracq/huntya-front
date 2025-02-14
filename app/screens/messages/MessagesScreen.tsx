@@ -36,8 +36,7 @@ export default function MessagesScreen({ navigation, route }: Props) {
                 if (user._id) {
                     convService.getUserConvs(user._id)
                         .then((data) => {
-                            getConvNameAndPicture(data);
-                            setLoading(false);
+                            getConvNameAndPicture(data, user._id);
                         })
                         .catch((error) => {
                             console.log(error);
@@ -52,12 +51,11 @@ export default function MessagesScreen({ navigation, route }: Props) {
     }
 
 
-    async function getConvNameAndPicture(convs: Conversation[]) {
-        if (!userData) return;
+    async function getConvNameAndPicture(convs: Conversation[], userId: string | null) {
         const updatedConvs = await Promise.all(
             convs.map(async (conversation) => {
                 if (!conversation.name || !conversation.picture) {
-                    const otherUserId = conversation.participants.find((id) => id !== userData._id);
+                    const otherUserId = conversation.participants.find((id) => id !== userId);
                     if (!otherUserId) return conversation;
 
                     try {
@@ -66,11 +64,13 @@ export default function MessagesScreen({ navigation, route }: Props) {
                         conversation.picture = user.imageUrl;
                     } catch (error) {
                         console.log(error);
+                        setLoading(false);
                     }
                 }
                 return conversation;
             })
         );
+        setLoading(false);
         setConversations(orderConversations(updatedConvs));
     }
 
@@ -96,6 +96,21 @@ export default function MessagesScreen({ navigation, route }: Props) {
             .catch((error) => {
                 console.log(error);
             });
+    }
+
+
+    function getNbUnreadMessages(conversation: Conversation) {
+        if (!userData) return 0;
+        // return the number of messages that are not read by the user
+        // means the nb of last messages that are not read by the user
+        let nbUnreadMessages = 0;
+        for (let i = conversation.messages.length - 1; i >= 0; i--) {
+            if (conversation.messages[i].senderId === userData._id) {
+                break;
+            }
+            nbUnreadMessages++;
+        }
+        return nbUnreadMessages;
     }
 
 
@@ -128,6 +143,7 @@ export default function MessagesScreen({ navigation, route }: Props) {
                                 : conversation.messages[conversation.messages.length - 1].text}
                             lastMessageDate={functions.getStringDateDifference2(conversation.messages[conversation.messages.length - 1].date)}
                             isRead={conversation.read ? true : conversation.messages[conversation.messages.length - 1].senderId === userData._id}
+                            nbUnreadMessages={getNbUnreadMessages(conversation)}
                             onPress={() => goToChat(conversation)}
                         />
                     )
@@ -137,6 +153,7 @@ export default function MessagesScreen({ navigation, route }: Props) {
                     <BodyText
                         text="Aucun message"
                         color={Colors.darkGrey}
+                        style={{ alignSelf: 'center', marginTop: 20 }}
                     />
                 }
             </ScrollView>

@@ -133,6 +133,8 @@ function getIconSource(name: string) {
             return require('../assets/icons/dots.png');
         case 'send':
             return require('../assets/icons/send.png');
+        case 'shield2':
+            return require('../assets/icons/shield2.png');
         default:
             return require('../assets/icons/none.png');
     }

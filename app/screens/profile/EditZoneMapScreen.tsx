@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { NativeStackScreenProps } from 'react-native-screens/lib/typescript/native-stack/types';
 import { NavParams } from '@/app/navigations/UnloggedNav';
@@ -74,8 +74,36 @@ export default function EditZoneScreen({ navigation, route }: Props) {
             });
     }
 
+    const canChangeZones = () => {
+        let can = false;
+        if (route.params.user.agentProperties?.lastZoneUpdateDate) {
+            const lastUpdate = new Date(route.params.user.agentProperties.lastZoneUpdateDate);
+            const now = new Date();
+            const diff = now.getTime() - lastUpdate.getTime();
+            const days = diff / (1000 * 3600 * 24);
+            if (days >= 30) {
+                can = true;
+            }
+        }
+        if (!can) {
+            Alert.alert(
+                'Attention',
+                'Vous ne pouvez changer de zones que tous les 30 jours.',
+                [
+                    {
+                        text: 'OK',
+                        onPress: () => navigation.goBack(),
+                        style: 'cancel'
+                    },
+                ]
+            );
+        }
+
+    }
+
     useEffect(() => {
         getZones();
+        canChangeZones();
     }, []);
 
 

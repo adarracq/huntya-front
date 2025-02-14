@@ -1,7 +1,6 @@
 import { FlatList, Image, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import io from 'socket.io-client';
-import Conversation from '@/app/models/Conversation';
 import { convService } from '@/app/services/conv.service';
 import Colors from '@/app/constants/Colors';
 import SmallText from '@/app/components/atoms/SmallText';
@@ -16,6 +15,7 @@ import Event from '@/app/models/Event';
 import EventDetails from '@/app/constants/EventDetails';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Title2 from '../atoms/Title2';
+import ReportDrawer from '@/app/screens/messages/components/ReportDrawer';
 
 
 type Props = {
@@ -31,8 +31,9 @@ export default function Chat(props: Props) {
     const [messages, setMessages] = useState<Message[]>([]);
     const [currentMessage, setCurrentMessage] = useState<string>('');
     const socket = io(process.env.EXPO_PUBLIC_DEV_API_URL);
-    const [conv, setConv] = useState<Conversation>();
+    const [convId, setConvId] = useState(null);
     const [openNewEvent, setOpenNewEvent] = useState(false);
+    const [openReport, setOpenReport] = useState(false);
 
     function onSendMessage() {
         if (currentMessage === '') return;
@@ -56,8 +57,8 @@ export default function Chat(props: Props) {
         if (props.user._id && props.withUser._id) {
             convService.getConv(props.user._id, props.withUser._id)
                 .then((data) => {
-                    setMessages(data.messages);
-                    setConv(data);
+                    setMessages(data.messages.reverse());
+                    setConvId(data._id);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -88,7 +89,7 @@ export default function Chat(props: Props) {
     useEffect(() => {
         getMessages();
         socket.on('receiveMessage', (message) => {
-            setMessages((prevMessages) => [...prevMessages, message]);
+            getMessages();
         });
 
         return () => {
@@ -99,9 +100,9 @@ export default function Chat(props: Props) {
 
 
     useEffect(() => {
-        if (conv)
-            convService.readConv(conv?._id).then(() => console.log('conv read')).catch((error) => console.log(error));
-    }, [conv]);
+        if (convId)
+            convService.readConv(convId).then(() => console.log('conv read')).catch((error) => console.log(error));
+    }, [convId]);
 
     return (
         <View style={styles.container}>
@@ -109,13 +110,13 @@ export default function Chat(props: Props) {
                 user={props.withUser}
                 onPressBack={() => props.onGoBack()}
                 onPressCalendar={() => setOpenNewEvent(!openNewEvent)}
+                onPressReport={() => setOpenReport(!openReport)}
                 onClickName={onClickName}
             />
+
             <FlatList
                 data={messages}
-                //keyExtractor={item => item._id}
                 inverted
-                contentContainerStyle={{ flexDirection: 'column-reverse' }}
                 renderItem={({ item, index }) => (
                     <View style={{
                         flexDirection: 'column',
@@ -189,6 +190,7 @@ export default function Chat(props: Props) {
                 )}
             />
 
+
             <View style={{
                 padding: 10,
             }}>
@@ -226,6 +228,13 @@ export default function Chat(props: Props) {
                     user={props.user}
                     withUser={props.withUser}
                     onValidate={(event) => addEvent(event)}
+                />
+            }
+            {convId && props.user &&
+                <ReportDrawer
+                    open={openReport}
+                    convID={convId}
+                    user={props.user}
                 />
             }
         </View>

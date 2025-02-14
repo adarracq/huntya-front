@@ -25,8 +25,10 @@ export default function DayEvents(props: Props) {
     const [selectedEvent, setSelectedEvent] = useState<Event>();
 
     function editEvent(event: Event) {
+        if (event.asker.email != user.email) return;
         setOpenEditEvent(!openEditEvent);
         setSelectedEvent(event);
+
     }
 
     return (
@@ -42,16 +44,35 @@ export default function DayEvents(props: Props) {
                             <BodyText text={props.date + ' - ' + event.hour} color={Colors.darkGrey} />
                             <Title2 title={EventDetails.types[event.type].label} />
                             {
-                                event.guests.map((guest, index) => (
-                                    <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }} key={index}>
-                                        <Image source={{ uri: guest.imageUrl ?? '' }} style={styles.image} />
+                                event.guests.map((guest, index) => {
 
+                                    if (guest.email != user.email) {
+                                        return (
+                                            <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }} key={index}>
+                                                <Image source={{ uri: guest.imageUrl ?? '' }} style={styles.image} />
+
+                                                <View style={{ alignItems: 'flex-start' }}>
+                                                    <BodyText text={guest.firstname ?? ''} isBold />
+                                                    <BodyText text={'Voir le profil'} color={Colors.mainBlue} />
+                                                </View>
+                                            </View>
+                                        )
+                                    } else {
+                                        return null;
+                                    }
+                                })
+                            }
+                            {
+                                event.asker.email != user.email &&
+                                (
+                                    <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
+                                        <Image source={{ uri: event.asker.imageUrl ?? '' }} style={styles.image} />
                                         <View style={{ alignItems: 'flex-start' }}>
-                                            <BodyText text={guest.firstname ?? ''} isBold />
+                                            <BodyText text={event.asker.firstname ?? ''} isBold />
                                             <BodyText text={'Voir le profil'} color={Colors.mainBlue} />
                                         </View>
                                     </View>
-                                ))
+                                )
                             }
                         </View>
                     </TouchableOpacity>

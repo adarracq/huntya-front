@@ -37,7 +37,7 @@ export default function SelectZoneMapScreen({ navigation, route }: Props) {
         const updatedUser = {
             user: {
                 email: user!.email,
-                agentProperties: { ...user!.agentProperties, zoneCodes: selectedZoneCodes }
+                agentProperties: { ...user!.agentProperties, zoneCodes: selectedZoneCodes, lastZoneUpdateDate: new Date() }
             }
         };
 

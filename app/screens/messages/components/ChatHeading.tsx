@@ -1,7 +1,6 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import User from '@/app/models/User';
-import ProjectDetails from '@/app/constants/ProjectDetails';
 import Colors from '@/app/constants/Colors';
 import { functions } from '@/app/utils/Functions';
 import Title1 from '@/app/components/atoms/Title1';
@@ -12,6 +11,7 @@ type Props = {
     user: User;
     onPressBack: () => void;
     onPressCalendar: () => void;
+    onPressReport: () => void;
     onClickName: () => void;
 }
 export default function ChatHeading(props: Props) {
@@ -102,7 +102,7 @@ export default function ChatHeading(props: Props) {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={props.onPressCalendar}
+                    onPress={props.onPressReport}
                     style={{
                         backgroundColor: Colors.white,
                         padding: 12,

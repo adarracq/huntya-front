@@ -85,10 +85,11 @@ export default function PublicAgentProfile(props: Props) {
                     </View>
                 }
             </View>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 12 }}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 12, marginLeft: 20 }}>
                 {props.user.agentProperties?.specialities?.map((speciality, index) => (
                     <View key={index} style={{
                         borderRadius: 100,
+                        maxHeight: 40,
                         backgroundColor: AgentSpecialities.specialities[speciality].color,
                         alignContent: 'center',
                         justifyContent: 'center',

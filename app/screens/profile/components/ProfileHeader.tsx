@@ -6,6 +6,7 @@ import Colors from '@/app/constants/Colors';
 import BodyText from '@/app/components/atoms/BodyText';
 import * as ImagePicker from 'expo-image-picker';
 import Title0 from '@/app/components/atoms/Title0';
+import { userService } from '@/app/services/user.service';
 
 type Props = {
     user: User;
@@ -20,7 +21,7 @@ export default function ProfileHeader(props: Props) {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            aspect: [4, 3],
+            aspect: [3, 3],
             quality: 1,
         });
 
@@ -34,13 +35,13 @@ export default function ProfileHeader(props: Props) {
             formData.append('image', blob);
 
 
-            /*await userService.uploadPicture(props.user.email, formData)
+            await userService.uploadPicture(props.user.email, formData)
                 .then(() => {
                     console.log('Image updated');
                 })
                 .catch((error) => {
                     console.log(error);
-                });*/
+                });
 
         }
     };
