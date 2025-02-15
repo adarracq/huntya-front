@@ -81,6 +81,8 @@ export default function CheckEmailCodeScreen({ navigation, route }: Props) {
                         description: 'Verifiez votre boite e-mail',
                         type: 'success',
                     });
+                    AsyncStorageUser.setToken(res.token);
+                    console.log(res);
                 }
                 else {
                     showMessage({

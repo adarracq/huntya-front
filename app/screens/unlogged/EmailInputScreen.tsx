@@ -12,6 +12,7 @@ import { functions } from '@/app/utils/Functions';
 import { useQuery } from "react-query";
 import { userService } from '@/app/services/user.service';
 import LoadingScreen from '@/app/components/molecules/LoadingScreen';
+import AsyncStorageUser from '@/app/utils/AsyncStorageUser';
 
 
 type Props = NativeStackScreenProps<NavParams, 'EmailInput'>;
@@ -68,6 +69,7 @@ export default function EmailInputScreen({ navigation, route }: Props) {
                 console.log(res);
                 if (res.message) {
                     navigation.navigate('CheckEmailCode', { email: email, loginOrSignup: res.message });
+                    AsyncStorageUser.setToken(res.token);
                 }
                 else {
                     showMessage({

@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import User from '../models/User';
 
 
 const setUser = async (value: any) => {
@@ -11,6 +10,14 @@ const getUser = async () => {
     return JSON.parse(value || '{}')
 }
 
+const setToken = async (value: any) => {
+    await AsyncStorage.setItem('token', value)
+}
+
+const getToken = async () => {
+    return await AsyncStorage.getItem('token');
+}
+
 const Logout = () => {
     AsyncStorage.clear()
 }
@@ -18,5 +25,7 @@ const Logout = () => {
 export default {
     setUser,
     getUser,
+    setToken,
+    getToken,
     Logout,
 }

@@ -62,6 +62,7 @@ export default function CalendarScreen({ navigation, route }: Props) {
                 ]
                 //setFriends(friends);
                 setUserData(user);
+                console.log('friends', user.friends);
                 setFriends(user.friends);
             })
             .catch((error) => {

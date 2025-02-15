@@ -1,3 +1,5 @@
+import AsyncStorageUser from "./AsyncStorageUser";
+
 export const fetchWrapper = {
     get,
     getFile,
@@ -7,33 +9,46 @@ export const fetchWrapper = {
     delete: _delete
 };
 
-function get(url: string) {
+async function get(url: string) {
+    let token = await AsyncStorageUser.getToken();
     const requestOptions = {
         method: 'GET',
+        headers: { authorization: 'Bearer ' + token }
     };
     return fetch(url, requestOptions).then(handleResponse);
 }
 
-function getFile(url: string) {
+async function getFile(url: string) {
+    let token = await AsyncStorageUser.getToken();
     const requestOptions = {
-        method: 'GET'
+        method: 'GET',
+        headers: { authorization: 'Bearer ' + token }
     };
     return fetch(url, requestOptions).then(handleFileResponse);
 }
 
-function post(url: string, body: any) {
+async function post(url: string, body: any) {
+    let token = await AsyncStorageUser.getToken();
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+            'Content-Type': 'application/json',
+            authorization: 'Bearer ' + token
+        },
         body: JSON.stringify(body)
     };
     return fetch(url, requestOptions).then(handleResponse);
 }
 
-function put(url: string, body: any) {
+async function put(url: string, body: any) {
+    let token = await AsyncStorageUser.getToken();
     const requestOptions = {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'multipart/form-data' },
+        headers: { 
+            'Content-Type': 'application/json', 
+            'Accept': 'multipart/form-data',
+            authorization: 'Bearer ' + token
+        },
         body: JSON.stringify(body),
         credential: 'include'
     };
@@ -41,12 +56,14 @@ function put(url: string, body: any) {
 }
 
 
-function putImage(url:string, formData:any) {
+async function putImage(url:string, formData:any) {
+    let token = await AsyncStorageUser.getToken();
     const requestOptions = {
         method: "PUT",
         body: formData,
         headers: {
             "Accept": "multipart/form-data",
+            authorization: 'Bearer ' + token
         },
         credentials: "include",
     };
@@ -56,7 +73,7 @@ function putImage(url:string, formData:any) {
 
 
 // prefixed with underscored because delete is a reserved word in javascript
-function _delete(url: string) {
+async function _delete(url: string) {
     const requestOptions = {
         method: 'DELETE'
     };

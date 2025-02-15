@@ -39,6 +39,7 @@ export default function NewEventDrawer(props: Props) {
     const [hour, setHour] = useState<string>('');
     const [openHour, setOpenHour] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [friends, setFriends] = useState<UserPublic[]>(props.friends);
 
     function createEvent() {
         if (selectedType === -1 || dateString === '' || hour === '') {
@@ -203,7 +204,7 @@ export default function NewEventDrawer(props: Props) {
                         />
                         :
                         <AddGuestDrawer
-                            friends={props.friends}
+                            friends={friends}
                             onSelectFriend={(friend) => {
                                 let newGuests = selectedGuests;
                                 if (newGuests.find(g => g.email === friend.email)) {
@@ -211,13 +212,15 @@ export default function NewEventDrawer(props: Props) {
                                 } else {
                                     newGuests.push(friend);
                                 }
+                                console.log(newGuests);
                                 setSelectedGuests(newGuests);
                                 // we add selected value to friend array
-                                props.friends.map(f => {
+                                setFriends(friends.map(f => {
                                     if (f.email === friend.email) {
                                         f.selected = !f.selected;
                                     }
-                                })
+                                    return f;
+                                }));
                             }}
                         />}
                     {

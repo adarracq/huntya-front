@@ -118,22 +118,21 @@ export default function AgentMap(props: Props) {
                 }
 
             </MapView>
-            {
-                openDrawer &&
-                <ProjectDrawer
-                    project={selectedProject as Project}
-                    open={openDrawer}
-                    onSeeProfile={() => {
-                        props.onSeeProfile(selectedProject?.user_email ?? '');
-                    }}
-                    onSeeProject={() => {
-                        props.onSeeProject(selectedProject as Project);
-                    }}
-                    onMessage={() => {
-                        props.onMessage(selectedProject?.user_email ?? '');
-                    }}
-                />
-            }
+
+            <ProjectDrawer
+                project={selectedProject as Project}
+                open={openDrawer}
+                onSeeProfile={() => {
+                    props.onSeeProfile(selectedProject?.user_email ?? '');
+                }}
+                onSeeProject={() => {
+                    props.onSeeProject(selectedProject as Project);
+                }}
+                onMessage={() => {
+                    props.onMessage(selectedProject?.user_email ?? '');
+                }}
+            />
+
         </>
     )
 }

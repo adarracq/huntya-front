@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, ViewStyle } from 'react-native'
+import { TouchableOpacity, Image, ViewStyle } from 'react-native'
 import React from 'react'
 import Colors from '../../constants/Colors';
 import { functions } from '@/app/utils/Functions';

@@ -14,6 +14,7 @@ type Props = {
 }
 
 export default function AddGuestDrawer(props: Props) {
+
     return (
         <DropDown
             placeholder="Sélectionner des invités"
